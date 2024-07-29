@@ -4,6 +4,12 @@
     <title>Fazit</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
+        body {
+            overflow-y: scroll;
+            margin: 75px;
+            background-color: #f4f4f4;
+        }
+
         .navbar {
             background-color: #333;
             overflow: hidden;
@@ -17,7 +23,7 @@
             justify-content: center;
             align-items: center;
         }
-        
+
         .mi-texto {
             font-family: "Calibri", sans-serif;
             font-style: italic;
@@ -29,34 +35,6 @@
             animation: rainbow 5s infinite;
         }
 
-         .mainpagetext {
-            font-family: "Arial", Helvetica, sans-serif;
-            font-style: normal;
-            font-size: 20px;
-            font-weight: normal;
-            font-variant: small-caps;
-            color: #333;
-        }
-
-        .mainpagetext {
-            font-family: "Calibri", sans-serif;
-            font-style: normal;
-            font-size: 20px;
-            font-weight: normal;
-            font-variant: small-caps;
-            color: #333;
-        }
-        
-        .subtitle {
-            font-family: "Calibri", sans-serif;
-            font-style: italic;
-            font-size: 30px;
-            font-weight: normal;
-            font-variant: small-caps;
-            color: #333;
-            align-text: center;
-        }
-      
         .titletext {
             font-family: "Calibri", sans-serif;
             font-style: italic;
@@ -66,7 +44,19 @@
             color: transparent;
             transition: color 0.5s ease;
             animation: rainbow 5s infinite;
-            align-text: center;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .subtitle {
+            font-family: "Calibri", sans-serif;
+            font-style: italic;
+            font-size: 30px;
+            font-weight: normal;
+            font-variant: small-caps;
+            color: #333;
+            text-align: center;
+            margin-bottom: 50px;
         }
 
         /* Keyframes for the rainbow effect */
@@ -85,9 +75,59 @@
             margin-right: 5px;
         }
 
-        body {
-            overflow-y: scroll;
-            margin:75px
+        .separator {
+            border: 0;
+            height: 1px;
+            background: #ccc;
+            margin: 20px 0;
+        }
+
+        .changelog-section {
+            margin-top: 30px;
+        }
+
+        .changelog-section h2 {
+            font-family: "Calibri", sans-serif;
+            font-style: italic;
+            font-size: 36px;
+            font-weight: normal;
+            font-variant: small-caps;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 15px;
+            padding: 20px;
+            font-family: "Arial", Helvetica, sans-serif;
+            font-size: 18px;
+        }
+
+        .card h3 {
+            font-family: "Calibri", sans-serif;
+            font-style: italic;
+            font-size: 24px;
+            font-weight: normal;
+            font-variant: small-caps;
+            color: #333;
+            margin-top: 0;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -95,8 +135,56 @@
     <div class="navbar">
         <div class="mi-texto"><i class="fas fa-star icon"></i>Fazit <i class="fas fa-star icon"></i></div>
     </div>
-    <div class="titletext">Welcome to the fazit wiki and forums!</div>
-    <div class="subtitle">Here is the official and best done game wiki!, also, "i did this before sharkco!"</div>
 
+    <div class="titletext">Welcome to the Fazit Wiki and Forums!</div>
+    <div class="subtitle">Here is the official and best-done game wiki! Also, "I did this before Sharkco!"</div>
+
+    <hr class="separator">
+
+    <div class="changelog-section">
+        <h2>Changelogs</h2>
+        <div class="card-container">
+            <div class="card">
+                <h3>Update 0.15</h3>
+                <p>· Added a drinking animation for the Bloxy cola<br>
+                   · Fixed 5 bugs<br>
+                   · Changed the game to private to start the private testing period.</p>
+            </div>
+            <div class="card">
+                <h3>Update 0.6</h3>
+                <p>· Added First Part of the map<br>
+                   · Added teleporters<br>
+                   · Added ragdoll, blood, and realistic head movement</p>
+            </div>
+            <div class="card">
+                <h3>Update 1.0</h3>
+                <p>· ADDED GUIS FOR MORPH AND TEAM SELECTION<br>
+                   · FIXED BUGS<br>
+                   · ADDED A GENERAL UPDATE.<br>
+                   · Added Fire Cat (New Character)</p>
+            </div>
+            <div class="card">
+                <h3>Break 1</h3>
+                <p>Took a break from coding, and Fazit.</p>
+            </div>
+            <div class="card">
+                <h3>Update 1.25</h3>
+                <p>· Added More stores<br>
+                   · Added Institutional White (Back), and NexGen<br>
+                   · Removed Institutional White protogen<br>
+                   · Added Arcade<br>
+                   · Added Cafeteria<br>
+                   · Added Flood<br>
+                   · Added Blackout<br>
+                   · Added Safe zone</p>
+            </div>
+            <div class="card">
+                <h3>Update 1.5 (Important)</h3>
+                <p>· Graphic revamp<br>
+                   · Added the entity tag to Oliver (so he doesn't pass through the safe zone)<br>
+                   · Added Parking lot</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
