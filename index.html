@@ -20,8 +20,9 @@
             width: calc(100% + 75px);
             left: -75px; 
             display: flex;
-            justify-content: space-between; /* Space between items */
+            justify-content: space-between;
             align-items: center;
+            z-index: 1000;
         }
 
         .mi-texto {
@@ -33,7 +34,10 @@
             color: transparent;
             transition: color 0.5s ease;
             animation: rainbow 5s infinite;
-            margin-left: 20px; /* Add margin to align to the left */
+            margin-left: 20px;
+            white-space: nowrap; /* Prevents text from breaking to the next line */
+            overflow: hidden; /* Hides overflow if the text is too long */
+            text-overflow: ellipsis; /* Adds ellipsis if the text overflows */
         }
 
         .menu-icon {
@@ -53,7 +57,7 @@
             overflow-x: hidden;
             transition: 0.5s;
             padding-top: 60px;
-            z-index: 1000;
+            z-index: 1001;
         }
 
         .sidebar a {
@@ -99,7 +103,7 @@
             color: #333;
             text-align: center;
             margin-bottom: 50px;
-            margin-top: 100px; /* Adjust margin-top to prevent overlapping */
+            margin-top: 100px;
         }
 
         /* Keyframes for the rainbow effect */
