@@ -8,19 +8,19 @@
             overflow-y: scroll;
             margin: 75px;
             background-color: #f4f4f4;
+            font-family: "Arial", Helvetica, sans-serif;
         }
 
         .navbar {
             background-color: #333;
             overflow: hidden;
-            text-align: center;
             padding: 10px 0;
             position: fixed; 
             top: 0; 
             width: calc(100% + 75px);
             left: -75px; 
             display: flex;
-            justify-content: center;
+            justify-content: space-between; /* Space between items */
             align-items: center;
         }
 
@@ -33,6 +33,47 @@
             color: transparent;
             transition: color 0.5s ease;
             animation: rainbow 5s infinite;
+        }
+
+        .menu-icon {
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #fff;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+
+        .closebtn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
         }
 
         .titletext {
@@ -71,10 +112,6 @@
             100% { color: red; }
         }
 
-        .icon {
-            margin-right: 5px;
-        }
-
         .separator {
             border: 0;
             height: 1px;
@@ -111,7 +148,6 @@
             width: 300px;
             margin: 15px;
             padding: 20px;
-            font-family: "Arial", Helvetica, sans-serif;
             font-size: 18px;
         }
 
@@ -134,6 +170,15 @@
 <body>
     <div class="navbar">
         <div class="mi-texto"><i class="fas fa-star icon"></i>Fazit <i class="fas fa-star icon"></i></div>
+        <div class="menu-icon" onclick="openNav()"><i class="fas fa-bars"></i></div>
+    </div>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#home">Home</a>
+        <a href="#changelogs">Changelogs</a>
+        <a href="#forums">Forums</a>
+        <a href="#contact">Contact</a>
     </div>
 
     <div class="titletext">Welcome to the Fazit Wiki and Forums!</div>
@@ -141,7 +186,7 @@
 
     <hr class="separator">
 
-    <div class="changelog-section">
+    <div class="changelog-section" id="changelogs">
         <h2>Changelogs</h2>
         <div class="card-container">
             <div class="card">
@@ -186,5 +231,15 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+        }
+    </script>
 </body>
 </html>
