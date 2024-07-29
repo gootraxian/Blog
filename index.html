@@ -4,26 +4,49 @@
     <title>Fazit</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        body {
-            overflow-y: scroll;
-            margin: 75px;
-            background-color: #f4f4f4;
-            font-family: "Arial", Helvetica, sans-serif;
-        }
+body {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    margin: 75px;
+    background-color: #f4f4f4;
+    font-family: "Arial", Helvetica, sans-serif;
+}
 
-        .navbar {
-            background-color: #333;
-            overflow: hidden;
-            padding: 10px;
-            position: fixed; 
-            top: 0; 
-            width: 100%;
-            max-width: 100%; /* Ensure it doesn't overflow */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-        }
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0; /* Ensure it is aligned to the left */
+    width: 100%;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.menu-icon {
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.mi-texto {
+    font-family: "Calibri", sans-serif;
+    font-style: italic;
+    font-size: 30px;
+    font-weight: bold;
+    font-variant: small-caps;
+    color: transparent;
+    transition: color 0.5s ease;
+    animation: rainbow 5s infinite;
+    margin-left: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
         .mi-texto {
             font-family: "Calibri", sans-serif;
@@ -175,7 +198,7 @@
 </head>
 <body>
     <div class="navbar">
-        <div class="mi-texto"><i class="fas fa-star icon"></i> Fazit <i class="fas fa-star icon"></i></div>
+        <div class="mi-texto"><img src="images/star.png" class="icon" alt="Star Icon"> Fazit </div>
         <div class="menu-icon" onclick="openNav()"><i class="fas fa-bars"></i></div>
     </div>
 
