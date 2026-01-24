@@ -1,73 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Fazit</title>
+    <title>Portafolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        /* Styles for the navigation bar */
-        .navbar {
-            background-color: #333;
-            overflow: hidden;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed; /* Set the position to fixed */
-            top: 0; /* Position it at the top of the viewport */
-            width: 100%; /* Make it span the entire width */
-        }
-
-        /* Apply the keyframes animation to the text */
-        .mi-texto {
-            font-family: "Calibri", sans-serif;
-            font-style: italic;
-            font-size: 30px;
-            font-weight: bold;
-            font-variant: small-caps;
-            color: transparent;
-            transition: color 0.5s ease;
-            animation: rainbow 5s infinite;
-        }
-
-        /* Keyframes for the rainbow effect */
-        @keyframes rainbow {
-            0% { color: red; }
-            14% { color: orange; }
-            28% { color: yellow; }
-            42% { color: green; }
-            57% { color: blue; }
-            71% { color: indigo; }
-            85% { color: violet; }
-            100% { color: red; }
-        }
-
-        /* Styles for the separator box */
-        .separator-box {
-            background-color: #ccc;
-            height: 10px;
-            margin-bottom: 10px;
-            width: 100%;
-            position: absolute; /* Change to absolute positioning */
-            bottom: 0; /* Position it at the bottom of the containing element */
-        }
-
-        /* Styles for the icon */
-        .icon {
-            margin-right: 5px;
-        }
-
-        /* Make the body scrollable with a margin */
-        body {
-            overflow-y: scroll;
-            margin: 20px; /* Add your desired margin value here */
-        }
-    </style>
 </head>
 <body>
-    <div class="navbar">
-        <div class="mi-texto"><i class="fas fa-star icon"></i>Fazit <i class="fas fa-star icon"></i></div>
-    </div>
-    <div class="separator-box"></div>
-    -
-    .
-    Meow
+    <div class="tab-container">
+  <div class="tabs">
+    <button class="tab active" data-tab="home">Home</button>
+    <button class="tab" data-tab="about">About</button>
+    <button class="tab" data-tab="contact">Contact</button>
+  </div>
+
+  <div class="tab-content active" id="home">
+    <h2>Home Tab</h2>
+    <p>Welcome to the home tab!</p>
+  </div>
+  <div class="tab-content" id="about">
+    <h2>About Tab</h2>
+    <p>Here's a little info about us.</p>
+  </div>
+  <div class="tab-content" id="contact">
+    <h2>Contact Tab</h2>
+    <p>Contact us anytime. We’re always here!</p>
+  </div>
+</div>
 </body>
 </html>
+
