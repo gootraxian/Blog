@@ -21,7 +21,9 @@
   padding: 0.5rem 1rem;
   cursor: pointer;
   border: none;
-  background: #eee;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  backdrop-filter: blur(12px);
   border-radius: 4px;
   transition: background 0.3s ease;
 }
@@ -39,11 +41,13 @@
 }
 
 .tab:hover {
-  background: #ddd;
+  background: rgba(25, 25, 25, 0.35);
+  backdrop-filter: blur(12px);
 }
 
 .tab.active {
-  background: #333;
+  background: rgba(25, 25, 25, 0.35);
+  backdrop-filter: blur(12px);
   color: #fff;
 }
 
