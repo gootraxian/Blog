@@ -53,6 +53,7 @@
 
 .tab-content {
   display: none;
+  color: #fff;
 }
 
 .tab-content.active {
