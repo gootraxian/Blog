@@ -1,32 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Portafolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="/Styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portafolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="Styles.css">
 </head>
 <body>
-    <div class="tab-container">
-  <div class="tabs">
-    <button class="tab active" data-tab="home">Home</button>
-    <button class="tab" data-tab="about">About</button>
-    <button class="tab" data-tab="contact">Contact</button>
+  <div class="tab-container">
+    <div class="tabs" role="tablist" aria-label="Main tabs">
+      <button id="tab-home-btn" class="tab active" role="tab" aria-controls="home" aria-selected="true" tabindex="0" data-tab="home">Home</button>
+      <button id="tab-about-btn" class="tab" role="tab" aria-controls="about" aria-selected="false" tabindex="-1" data-tab="about">About</button>
+      <button id="tab-contact-btn" class="tab" role="tab" aria-controls="contact" aria-selected="false" tabindex="-1" data-tab="contact">Contact</button>
+    </div>
+
+    <div class="tab-content active" id="home" role="tabpanel" aria-labelledby="tab-home-btn">
+      <h2>Home Tab</h2>
+      <p>Welcome to the home tab!</p>
+    </div>
+
+    <div class="tab-content" id="about" role="tabpanel" aria-labelledby="tab-about-btn" hidden>
+      <h2>About Tab</h2>
+      <p>Here's a little info about us.</p>
+    </div>
+
+    <div class="tab-content" id="contact" role="tabpanel" aria-labelledby="tab-contact-btn" hidden>
+      <h2>Contact Tab</h2>
+      <p>Contact us anytime. We're always here!</p>
+    </div>
   </div>
 
-  <div class="tab-content active" id="home">
-    <h2>Home Tab</h2>
-    <p>Welcome to the home tab!</p>
-  </div>
-  <div class="tab-content" id="about">
-    <h2>About Tab</h2>
-    <p>Here's a little info about us.</p>
-  </div>
-  <div class="tab-content" id="contact">
-    <h2>Contact Tab</h2>
-    <p>Contact us anytime. We’re always here!</p>
-  </div>
-</div>
+  <script>
+    (function () {
+      const tabs = Array.from(document.querySelectorAll('.tab'));
+      const panels = Array.from(document.querySelectorAll('.tab-content'));
+
+      function activateTab(selectedTab) {
+        tabs.forEach(tab => {
+          const isSelected = tab === selectedTab;
+          tab.classList.toggle('active', isSelected);
+          tab.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+          tab.setAttribute('tabindex', isSelected ? '0' : '-1');
+        });
+
+        panels.forEach(panel => {
+          const isActive = panel.id === selectedTab.dataset.tab;
+          panel.classList.toggle('active', isActive);
+          if (isActive) {
+            panel.removeAttribute('hidden');
+          } else {
+            panel.setAttribute('hidden', '');
+          }
+        });
+
+        selectedTab.focus();
+      }
+
+      // Click handlers
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => activateTab(tab));
+      });
+
+      // Keyboard navigation (Left/Right/Home/End)
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('keydown', (e) => {
+          let newIndex = null;
+          if (e.key === 'ArrowRight') newIndex = (index + 1) % tabs.length;
+          if (e.key === 'ArrowLeft') newIndex = (index - 1 + tabs.length) % tabs.length;
+          if (e.key === 'Home') newIndex = 0;
+          if (e.key === 'End') newIndex = tabs.length - 1;
+
+          if (newIndex !== null) {
+            e.preventDefault();
+            activateTab(tabs[newIndex]);
+          }
+        });
+      });
+
+      // Ensure initial state is consistent
+      const initial = tabs.find(t => t.classList.contains('active')) || tabs[0];
+      activateTab(initial);
+    })();
+  </script>
 </body>
 </html>
-
-
