@@ -79,10 +79,12 @@ html, body {
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
   margin-top: 1rem;
+  grid-auto-flow: dense; 
 }
+
 .grid-item {
   background: rgba(255,255,255,0.03);
   border-radius: 8px;
@@ -90,13 +92,18 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 140px;
+  position: relative;
+  min-height: auto; 
+  width: 100%;
+  height: 100%;
 }
+
 .grid-item img,
 .grid-item video {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
+  object-fit: cover; 
 }
 .grid-item video { max-height: 360px; }
 
@@ -124,4 +131,15 @@ html, body {
 
 ::-webkit-scrollbar-corner {
 
+}
+
+@media (min-width: 600px) {
+  .grid-item.orientation-landscape {
+    grid-column: span 2;
+  }
+
+  .grid-item.orientation-portrait {
+    grid-row: span 2;
+  }
+  
 }
