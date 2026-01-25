@@ -74,29 +74,24 @@ html, body {
 }
 
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px; 
-    padding: 20px;
-    max-width: 1200px; 
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
 }
-
 .grid-item {
-    border-radius: 5px;
-    overflow: hidden; 
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
 }
-
 .grid-item img,
-.grid-item video,
-.grid-item iframe {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    vertical-align: middle;
+.grid-item video {
+  width: 100%;
+  height: auto;
+  display: block;
 }
-
-.grid-container {
-    grid-auto-rows: minmax(200px, auto);
-}
+.grid-item video { max-height: 360px; }
