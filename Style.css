@@ -12,6 +12,11 @@ p {
   font-family: "Arial", sans-serif;
 }
 
+.listing {
+  font-family: "Arial", sans-serif;
+  font-size: 24px
+}
+
 .tab-container {
   width: 90%;
   height: 85%;
