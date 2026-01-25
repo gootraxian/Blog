@@ -12,6 +12,10 @@ p {
   font-family: "Arial", sans-serif;
 }
 
+h2 {
+  margin: 0px 0px 15px 0px;
+}
+
 #listing {
   margin: 12px 0px 0px 0px;
   font-family: "Arial", sans-serif;
