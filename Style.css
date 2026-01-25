@@ -3,6 +3,9 @@ html, body {
   width: 100%;
   
   display: flex;
+
+  scrollbar-width: thin;
+  scrollbar-color: #0d0d0d40 #00000040;
 }
 
 .tab-container {
