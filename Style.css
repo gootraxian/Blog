@@ -8,6 +8,10 @@ html, body {
   scrollbar-color: #0d0d0d40 #00000040;
 }
 
+p {
+  font-family: "Arial", sans-serif;
+}
+
 .tab-container {
   width: 90%;
   height: 85%;
