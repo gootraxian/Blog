@@ -99,3 +99,29 @@ html, body {
   display: block;
 }
 .grid-item video { max-height: 360px; }
+
+::-webkit-scrollbar {
+  width: 4px; 
+}
+
+::-webkit-scrollbar-track {
+  background: #0d0d0d40; 
+  border-radius: 10px; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00000040;
+  border-radius: 10px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00000066; 
+}
+
+::-webkit-scrollbar-button {
+  
+}
+
+::-webkit-scrollbar-corner {
+
+}
