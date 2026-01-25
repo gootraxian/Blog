@@ -66,3 +66,37 @@ html, body {
 .tab-content.active {
   display: block;
 }
+
+* {
+    box-sizing: border-box; /* Ensures padding and borders are included in the element's total width/height */
+    margin: 0;
+    padding: 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px; 
+    padding: 20px;
+    max-width: 1200px; 
+    margin: 0 auto;
+}
+
+.grid-item {
+    border-radius: 5px;
+    overflow: hidden; 
+}
+
+.grid-item img,
+.grid-item video,
+.grid-item iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    vertical-align: middle;
+}
+
+.grid-container {
+    grid-auto-rows: minmax(200px, auto);
+}
