@@ -260,6 +260,62 @@ p {
   animation: fadeIn 0.3s ease;
 }
 
+/* --- Scrollable List with Fade Effect --- */
+.social-links {
+  max-height: 400px; /* Adjust based on your preference */
+  overflow-y: auto;
+  padding-right: 10px;
+  
+  /* The "Overflow Blur" Effect */
+  mask-image: linear-gradient(to bottom, 
+    transparent 0%, 
+    black 5%, 
+    black 95%, 
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(to bottom, 
+    transparent 0%, 
+    black 5%, 
+    black 95%, 
+    transparent 100%
+  );
+}
+
+/* --- List Button with Avatar --- */
+.list-btn {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between image and text */
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.char-avatar-mini {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Makes it circular */
+  object-fit: cover;
+  background: #333; /* Fallback color */
+  flex-shrink: 0;
+}
+
+/* --- Scrollable Embed Content --- */
+.embed-content {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 10px;
+  /* Blur effect for the embed text if it's too long */
+  mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+}
+
+/* Styling the scrollbar within these areas to be very thin */
+.social-links::-webkit-scrollbar,
+.embed-content::-webkit-scrollbar {
+  width: 3px;
+}
+
 .embed-color-pill {
   width: 6px;
   background-color: #5865F2; /* Default color, changed by JS */
