@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Portafolio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="Style.css">
 </head>
 <body>
 <video id="bgVideo" autoplay muted loop playsinline>
   <source src="videos/bg.mp4" type="video/mp4">
 </video>
+
   <div class="tab-container">
     <div class="tabs" role="tablist" aria-label="Main tabs">
       <button id="tab-home-btn" class="tab active" role="tab" aria-controls="home" aria-selected="true" tabindex="0" data-tab="home">Home</button>
@@ -20,27 +22,33 @@
 
     <div class="tab-content active" id="home" role="tabpanel" aria-labelledby="tab-home-btn">
       <h2>Home Tab</h2>
-      <p>Hi! I'm katt! While you may know me as katt, you may also call me Exp009, KattStarzz, or ElectricColor! I'm experienced with lua, and practicing python, html, css and a bit of javascript! I live in mexico, tho multiple people have told me that my personality is.. European? I don't really care lol, I play Minecraft, Roblox and VrChat! I animate, code, 3d model, draw and moderate!</p>
-      <p id="listing"><Strong>Pronouns: </Strong>Any</p>
-      <p id="listing"><Strong>Sexuality: </Strong>Straight</p>
+      <p>Hi! I'm katt! While you may know me as katt, you may also call me Exp009, KattStarzz, or ElectricColor! I'm experienced with Lua, and practicing Python, HTML, CSS and a bit of JavaScript! I live in Mexico, tho multiple people have told me that my personality is.. European? I don't really care lol, I play Minecraft, Roblox and VRChat! I animate, code, 3D model, draw and moderate!</p>
+      
+      <div class="info-listings">
+        <p class="listing"><strong>Pronouns:</strong> Any</p>
+        <p class="listing"><strong>Sexuality:</strong> Straight</p>
+      </div>
     </div>
 
     <div class="tab-content" id="about" role="tabpanel" aria-labelledby="tab-about-btn" hidden>
-      <h2>Social media</h2>
-      <p>Here are<strong> my social media pages:</strong></p>
-      <p>https://www.youtube.com/@KattStarz</p>
-      <p>https://discord.gg/e8GxE4e4Bb</p>
-      <p>https://x.com/KattStarz</p>
-      <p>https://www.reddit.com/user/changed_fan/</p>
-      <p>https://www.tiktok.com/@kattstarzz</p>
+      <h2>Social Media</h2>
+      <p>Here are <strong>my social media pages:</strong></p>
+      <div class="social-links">
+        <a href="https://www.youtube.com/@KattStarz" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+        <a href="https://discord.gg/e8GxE4e4Bb" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+        <a href="https://x.com/KattStarz" target="_blank"><i class="fab fa-twitter"></i> Twitter / X</a>
+        <a href="https://www.reddit.com/user/changed_fan/" target="_blank"><i class="fab fa-reddit"></i> Reddit</a>
+        <a href="https://www.tiktok.com/@kattstarzz" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+      </div>
     </div>
 
     <div class="tab-content" id="contact" role="tabpanel" aria-labelledby="tab-contact-btn" hidden>
       <h2>Portfolio & Contact</h2>
-      <p>This page contains both portafolio and usernames & email for contact.</p>
-
+      <p>This page contains both my portfolio and usernames & email for contact.</p>
       <div class="grid-container" aria-live="polite"></div>
     </div>
+  </div>
+
   <script>
     (function () {
       const tabs = Array.from(document.querySelectorAll('.tab'));
@@ -56,10 +64,11 @@
 
         panels.forEach(panel => {
           const isActive = panel.id === selectedTab.dataset.tab;
-          panel.classList.toggle('active', isActive);
           if (isActive) {
+            panel.classList.add('active');
             panel.removeAttribute('hidden');
           } else {
+            panel.classList.remove('active');
             panel.setAttribute('hidden', '');
           }
         });
@@ -93,18 +102,6 @@
       activateTab(initial);
     })();
   </script>
-
-<script src="portfolio/portfolio-loader.js"></script>
+  <script src="portfolio/portfolio-loader.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
