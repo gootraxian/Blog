@@ -8,9 +8,9 @@ html, body {
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: center; /* Centers container horizontally */
-  align-items: center; /* Centers container vertically */
-  font-family: 'Poppins', sans-serif; /* Modern, clean font */
+  justify-content: center; 
+  align-items: center;
+  font-family: 'Poppins', sans-serif; 
   color: #f0f0f0;
   scrollbar-width: thin;
   scrollbar-color: #ffffff40 rgba(0,0,0,0.2);
@@ -26,22 +26,22 @@ html, body {
   height: auto;
   z-index: -1;
   object-fit: cover;
-  filter: brightness(0.6); /* Darkens video slightly so text pops more */
+  filter: brightness(0.6);
 }
 
 .tab-container {
   width: 90%;
-  max-width: 900px; /* Prevents it from getting too wide on huge screens */
+  max-width: 900px; 
   height: 85%;
   background: rgba(10, 10, 10, 0.45);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   padding: 2rem;
-  border-radius: 16px; /* Rounder corners */
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle glass edge */
+  border-radius: 16px; 
+  border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   overflow-y: auto;
-  animation: slideUp 0.6s ease-out; /* Entrance animation */
+  animation: slideUp 0.6s ease-out; 
 }
 
 h2 {
@@ -69,7 +69,6 @@ p {
   font-size: 18px;
 }
 
-/* --- Tabs --- */
 .tabs {
   display: flex;
   gap: 0.5rem;
@@ -95,7 +94,7 @@ p {
 .tab:hover {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
-  transform: translateY(-2px); /* Slight lift effect */
+  transform: translateY(-2px); 
 }
 
 .tab.active {
@@ -104,7 +103,6 @@ p {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* --- Tab Content & Animations --- */
 .tab-content {
   display: none;
 }
@@ -124,7 +122,6 @@ p {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Social Links --- */
 .social-links {
   display: flex;
   flex-direction: column;
@@ -149,10 +146,9 @@ p {
 
 .social-links a:hover {
   background: rgba(255, 255, 255, 0.15);
-  transform: translateX(5px); /* Slides to the right on hover */
+  transform: translateX(5px); 
 }
 
-/* --- Grid / Portfolio --- */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -176,7 +172,7 @@ p {
 }
 
 .grid-item:hover {
-  transform: scale(1.03); /* Pops out slightly on hover */
+  transform: scale(1.03); 
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -189,7 +185,6 @@ p {
 }
 .grid-item video { max-height: 360px; }
 
-/* --- Custom Scrollbar --- */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
@@ -198,19 +193,17 @@ p {
 }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
 
-/* --- Media Queries --- */
 @media (min-width: 600px) {
   .grid-item.orientation-landscape { grid-column: span 2; }
   .grid-item.orientation-portrait { grid-row: span 2; }
 }
 
-/* --- Split Layout for Tabs --- */
 .split-layout {
   display: flex;
   gap: 2rem;
   margin-top: 15px;
   align-items: flex-start;
-  flex-wrap: wrap; /* Allows it to stack on mobile */
+  flex-wrap: wrap; 
 }
 
 .list-pane {
@@ -225,7 +218,6 @@ p {
   justify-content: center;
 }
 
-/* --- List Buttons (Replaces previous <a> links) --- */
 .list-btn {
   color: #fff;
   font-family: inherit;
@@ -248,9 +240,8 @@ p {
   transform: translateX(5px);
 }
 
-/* --- Discord-Style Embed Card --- */
 .discord-embed {
-  background: rgba(43, 45, 49, 0.9); /* Discord dark gray */
+  background: rgba(43, 45, 49, 0.9); 
   border-radius: 8px;
   display: flex;
   overflow: hidden;
@@ -260,13 +251,11 @@ p {
   animation: fadeIn 0.3s ease;
 }
 
-/* --- Scrollable List with Fade Effect --- */
 .social-links {
-  max-height: 400px; /* Adjust based on your preference */
+  max-height: 400px; 
   overflow-y: auto;
   padding-right: 10px;
   
-  /* The "Overflow Blur" Effect */
   mask-image: linear-gradient(to bottom, 
     transparent 0%, 
     black 5%, 
@@ -281,11 +270,10 @@ p {
   );
 }
 
-/* --- List Button with Avatar --- */
 .list-btn {
   display: flex;
   align-items: center;
-  gap: 15px; /* Space between image and text */
+  gap: 15px; 
   margin-bottom: 8px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -294,23 +282,20 @@ p {
 .char-avatar-mini {
   width: 40px;
   height: 40px;
-  border-radius: 50%; /* Makes it circular */
+  border-radius: 50%; 
   object-fit: cover;
-  background: #333; /* Fallback color */
+  background: #333; 
   flex-shrink: 0;
 }
 
-/* --- Scrollable Embed Content --- */
 .embed-content {
   max-height: 500px;
   overflow-y: auto;
   padding-right: 10px;
-  /* Blur effect for the embed text if it's too long */
   mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
 }
 
-/* Styling the scrollbar within these areas to be very thin */
 .social-links::-webkit-scrollbar,
 .embed-content::-webkit-scrollbar {
   width: 3px;
@@ -318,7 +303,7 @@ p {
 
 .embed-color-pill {
   width: 6px;
-  background-color: #5865F2; /* Default color, changed by JS */
+  background-color: #5865F2; 
   flex-shrink: 0;
 }
 
@@ -343,7 +328,6 @@ p {
   line-height: 1.5;
 }
 
-/* Embed Image */
 .embed-image {
   width: 100%;
   max-height: 250px;
@@ -352,16 +336,15 @@ p {
   margin-top: 5px;
 }
 
-/* Embed Button */
 .embed-btn {
-  background: #5865F2; /* Discord blurple */
+  background: #5865F2; 
   color: #fff;
   padding: 10px 16px;
   border-radius: 4px;
   text-decoration: none;
   font-weight: 600;
   text-align: center;
-  align-self: flex-start; /* Keeps it from stretching */
+  align-self: flex-start; 
   transition: background 0.2s;
   margin-top: 5px;
 }
