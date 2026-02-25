@@ -284,7 +284,7 @@ p {
   height: 40px;
   border-radius: 50%; 
   object-fit: cover;
-  background: #333; 
+  background: #ffffff00; 
   flex-shrink: 0;
 }
 
