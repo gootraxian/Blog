@@ -203,3 +203,113 @@ p {
   .grid-item.orientation-landscape { grid-column: span 2; }
   .grid-item.orientation-portrait { grid-row: span 2; }
 }
+
+/* --- Split Layout for Tabs --- */
+.split-layout {
+  display: flex;
+  gap: 2rem;
+  margin-top: 15px;
+  align-items: flex-start;
+  flex-wrap: wrap; /* Allows it to stack on mobile */
+}
+
+.list-pane {
+  flex: 1;
+  min-width: 250px;
+}
+
+.preview-pane {
+  flex: 1.5;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+/* --- List Buttons (Replaces previous <a> links) --- */
+.list-btn {
+  color: #fff;
+  font-family: inherit;
+  font-size: 16px;
+  text-align: left;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.list-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(5px);
+}
+
+/* --- Discord-Style Embed Card --- */
+.discord-embed {
+  background: rgba(43, 45, 49, 0.9); /* Discord dark gray */
+  border-radius: 8px;
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.3s ease;
+}
+
+.embed-color-pill {
+  width: 6px;
+  background-color: #5865F2; /* Default color, changed by JS */
+  flex-shrink: 0;
+}
+
+.embed-content {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.embed-content h3 {
+  font-size: 20px;
+  color: #fff;
+  margin: 0;
+}
+
+.embed-content p {
+  font-size: 14px;
+  color: #dbdee1;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Embed Image */
+.embed-image {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+/* Embed Button */
+.embed-btn {
+  background: #5865F2; /* Discord blurple */
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  text-align: center;
+  align-self: flex-start; /* Keeps it from stretching */
+  transition: background 0.2s;
+  margin-top: 5px;
+}
+
+.embed-btn:hover {
+  background: #4752c4;
+}
