@@ -89,7 +89,6 @@
 
 <script>
   (function () {
-    // --- 1. TAB NAVIGATION LOGIC ---
     const tabs = Array.from(document.querySelectorAll('.tab'));
     const panels = Array.from(document.querySelectorAll('.tab-content'));
 
@@ -115,19 +114,16 @@
     }
 
     tabs.forEach(tab => tab.addEventListener('click', () => activateTab(tab)));
-    
-    // Default activation
+
     const initial = tabs.find(t => t.classList.contains('active')) || tabs[0];
     activateTab(initial);
 
-    // --- 2. SOCIAL MEDIA EMBED LOGIC ---
-    // Data dictionary for your socials. You can easily edit descriptions here!
     const socialData = {
-      youtube: { title: "YouTube", desc: "Check out my latest animations and video uploads!", color: "#FF0000", link: "https://www.youtube.com/@KattStarz" },
-      discord: { title: "Discord", desc: "Join my community server to chat and hang out!", color: "#5865F2", link: "https://discord.gg/e8GxE4e4Bb" },
-      twitter: { title: "Twitter / X", desc: "Follow me for quick updates, art, and thoughts.", color: "#1DA1F2", link: "https://x.com/KattStarz" },
-      reddit: { title: "Reddit", desc: "Catch my posts and discussions in various communities.", color: "#FF4500", link: "https://www.reddit.com/user/changed_fan/" },
-      tiktok: { title: "TikTok", desc: "Short-form videos, memes, and fun clips.", color: "#00f2fe", link: "https://www.tiktok.com/@kattstarzz" }
+      youtube: { title: "YouTube", desc: "My latest public art pieces and other art or game development content.", color: "#FF0000", link: "https://www.youtube.com/@KattStarz" },
+      discord: { title: "Discord", desc: "Hello! this is my community (not really) and my bot's support server!", color: "#5865F2", link: "https://discord.gg/e8GxE4e4Bb" },
+      twitter: { title: "Twitter / X", desc: "I almost never use twitter, but if you want... You can follow me here!", color: "#1DA1F2", link: "https://x.com/KattStarz" },
+      reddit: { title: "Reddit", desc: "My reddit account! I'm not very active but I sometimes get on!", color: "#FF4500", link: "https://www.reddit.com/user/changed_fan/" },
+      tiktok: { title: "TikTok", desc: "Almost the same content as youtube!", color: "#00f2fe", link: "https://www.tiktok.com/@kattstarzz" }
     };
 
     const socialButtons = document.querySelectorAll('.list-btn');
@@ -137,19 +133,16 @@
       btn.addEventListener('click', (e) => {
         const platform = e.currentTarget.dataset.social;
         const data = socialData[platform];
-        
-        // Populate the embed
+      
         document.getElementById('social-title').innerText = data.title;
         document.getElementById('social-desc').innerText = data.desc;
         document.getElementById('social-link').href = data.link;
         document.getElementById('social-color').style.backgroundColor = data.color;
-        
-        // Show the embed
+
         socialEmbed.style.display = 'flex';
       });
     });
 
-   // --- Updated CHARACTERS FETCH LOGIC ---
 const charListContainer = document.getElementById('character-list');
 const charEmbed = document.getElementById('char-embed');
 
@@ -157,24 +150,19 @@ fetch('ocs/characters.json')
   .then(response => response.json())
   .then(characters => {
     characters.forEach(char => {
-      // Create a button for each character
       const btn = document.createElement('button');
       btn.className = 'list-btn';
-      
-      // Create and add the mini avatar
+
       const miniImg = document.createElement('img');
-      miniImg.src = char.image || 'ocs/default-avatar.png'; // Fallback image
+      miniImg.src = char.image || 'ocs/default-avatar.png'; 
       miniImg.className = 'char-avatar-mini';
       
-      // Add the name text
       const nameText = document.createElement('span');
       nameText.innerText = char.name;
       
-      // Assemble button
       btn.appendChild(miniImg);
       btn.appendChild(nameText);
       
-      // Click event to show character details
       btn.addEventListener('click', () => {
         document.getElementById('char-title').innerText = char.name;
         document.getElementById('char-desc').innerText = char.description;
@@ -196,4 +184,5 @@ fetch('ocs/characters.json')
 <script src="portfolio/portfolio-loader.js"></script>
 </body>
 </html>
+
 
