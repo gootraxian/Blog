@@ -13,95 +13,178 @@
   <source src="videos/bg.mp4" type="video/mp4">
 </video>
 
-  <div class="tab-container">
-    <div class="tabs" role="tablist" aria-label="Main tabs">
-      <button id="tab-home-btn" class="tab active" role="tab" aria-controls="home" aria-selected="true" tabindex="0" data-tab="home">Home</button>
-      <button id="tab-about-btn" class="tab" role="tab" aria-controls="about" aria-selected="false" tabindex="-1" data-tab="about">Social Media</button>
-      <button id="tab-contact-btn" class="tab" role="tab" aria-controls="contact" aria-selected="false" tabindex="-1" data-tab="contact">Portfolio & Contact</button>
-    </div>
+<div class="tab-container">
+  <div class="tabs" role="tablist" aria-label="Main tabs">
+    <button id="tab-home-btn" class="tab active" role="tab" aria-controls="home" aria-selected="true" tabindex="0" data-tab="home">Home</button>
+    <button id="tab-about-btn" class="tab" role="tab" aria-controls="about" aria-selected="false" tabindex="-1" data-tab="about">Social Media</button>
+    <button id="tab-chars-btn" class="tab" role="tab" aria-controls="characters" aria-selected="false" tabindex="-1" data-tab="characters">Characters</button>
+    <button id="tab-contact-btn" class="tab" role="tab" aria-controls="contact" aria-selected="false" tabindex="-1" data-tab="contact">Portfolio & Contact</button>
+  </div>
 
-    <div class="tab-content active" id="home" role="tabpanel" aria-labelledby="tab-home-btn">
-      <h2>Home Tab</h2>
-      <p>Hi! I'm katt! While you may know me as katt, you may also call me Exp009, KattStarzz, or ElectricColor! I'm experienced with Lua, and practicing Python, HTML, CSS and a bit of JavaScript! I live in Mexico, tho multiple people have told me that my personality is.. European? I don't really care lol, I play Minecraft, Roblox and VRChat! I animate, code, 3D model, draw and moderate!</p>
-      
-      <div class="info-listings">
-        <p class="listing"><strong>Pronouns:</strong> Any</p>
-        <p class="listing"><strong>Sexuality:</strong> Straight</p>
-      </div>
-    </div>
-
-    <div class="tab-content" id="about" role="tabpanel" aria-labelledby="tab-about-btn" hidden>
-      <h2>Social Media</h2>
-      <p>Here are <strong>my social media pages:</strong></p>
-      <div class="social-links">
-        <a href="https://www.youtube.com/@KattStarz" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
-        <a href="https://discord.gg/e8GxE4e4Bb" target="_blank"><i class="fab fa-discord"></i> Discord</a>
-        <a href="https://x.com/KattStarz" target="_blank"><i class="fab fa-twitter"></i> Twitter / X</a>
-        <a href="https://www.reddit.com/user/changed_fan/" target="_blank"><i class="fab fa-reddit"></i> Reddit</a>
-        <a href="https://www.tiktok.com/@kattstarzz" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
-      </div>
-    </div>
-
-    <div class="tab-content" id="contact" role="tabpanel" aria-labelledby="tab-contact-btn" hidden>
-      <h2>Portfolio & Contact</h2>
-      <p>This page contains both my portfolio and usernames & email for contact.</p>
-      <div class="grid-container" aria-live="polite"></div>
+  <div class="tab-content active" id="home" role="tabpanel" aria-labelledby="tab-home-btn">
+    <h2>Home Tab</h2>
+    <p>Hi! I'm katt! While you may know me as katt, you may also call me Exp009, KattStarzz, or ElectricColor! I'm experienced with Lua, and practicing Python, HTML, CSS and a bit of JavaScript! I live in Mexico, tho multiple people have told me that my personality is.. European? I don't really care lol, I play Minecraft, Roblox and VRChat! I animate, code, 3D model, draw and moderate!</p>
+    
+    <div class="info-listings">
+      <p class="listing"><strong>Pronouns:</strong> Any</p>
+      <p class="listing"><strong>Sexuality:</strong> Straight</p>
     </div>
   </div>
 
-  <script>
-    (function () {
-      const tabs = Array.from(document.querySelectorAll('.tab'));
-      const panels = Array.from(document.querySelectorAll('.tab-content'));
+  <div class="tab-content" id="about" role="tabpanel" aria-labelledby="tab-about-btn" hidden>
+    <h2>Social Media</h2>
+    <div class="split-layout">
+      <div class="list-pane">
+        <p>Select a platform to view details:</p>
+        <div class="social-links" id="social-buttons">
+          <button class="list-btn" data-social="youtube"><i class="fab fa-youtube"></i> YouTube</button>
+          <button class="list-btn" data-social="discord"><i class="fab fa-discord"></i> Discord</button>
+          <button class="list-btn" data-social="twitter"><i class="fab fa-twitter"></i> Twitter / X</button>
+          <button class="list-btn" data-social="reddit"><i class="fab fa-reddit"></i> Reddit</button>
+          <button class="list-btn" data-social="tiktok"><i class="fab fa-tiktok"></i> TikTok</button>
+        </div>
+      </div>
+      
+      <div class="preview-pane">
+        <div id="social-embed" class="discord-embed" style="display: none;">
+          <div class="embed-color-pill" id="social-color"></div>
+          <div class="embed-content">
+            <h3 id="social-title">Platform Name</h3>
+            <p id="social-desc">Information about this social media profile goes here.</p>
+            <a id="social-link" href="#" target="_blank" class="embed-btn">View Profile</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      function activateTab(selectedTab) {
-        tabs.forEach(tab => {
-          const isSelected = tab === selectedTab;
-          tab.classList.toggle('active', isSelected);
-          tab.setAttribute('aria-selected', isSelected ? 'true' : 'false');
-          tab.setAttribute('tabindex', isSelected ? '0' : '-1');
-        });
+  <div class="tab-content" id="characters" role="tabpanel" aria-labelledby="tab-chars-btn" hidden>
+    <h2>Characters</h2>
+    <div class="split-layout">
+      <div class="list-pane">
+        <p>Select a character:</p>
+        <div class="social-links" id="character-list">
+          </div>
+      </div>
+      
+      <div class="preview-pane">
+        <div id="char-embed" class="discord-embed" style="display: none;">
+          <div class="embed-color-pill" id="char-color"></div>
+          <div class="embed-content">
+            <h3 id="char-title">Character Name</h3>
+            <p id="char-desc">Character description will appear here.</p>
+            <img id="char-img" src="" alt="Character Image" class="embed-image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        panels.forEach(panel => {
-          const isActive = panel.id === selectedTab.dataset.tab;
-          if (isActive) {
-            panel.classList.add('active');
-            panel.removeAttribute('hidden');
-          } else {
-            panel.classList.remove('active');
-            panel.setAttribute('hidden', '');
-          }
-        });
+  <div class="tab-content" id="contact" role="tabpanel" aria-labelledby="tab-contact-btn" hidden>
+    <h2>Portfolio & Contact</h2>
+    <p>This page contains both my portfolio and usernames & email for contact.</p>
+    <div class="grid-container" aria-live="polite"></div>
+  </div>
+</div>
 
-        selectedTab.focus();
-      }
+<script>
+  (function () {
+    // --- 1. TAB NAVIGATION LOGIC ---
+    const tabs = Array.from(document.querySelectorAll('.tab'));
+    const panels = Array.from(document.querySelectorAll('.tab-content'));
 
-      // Click handlers
+    function activateTab(selectedTab) {
       tabs.forEach(tab => {
-        tab.addEventListener('click', () => activateTab(tab));
+        const isSelected = tab === selectedTab;
+        tab.classList.toggle('active', isSelected);
+        tab.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+        tab.setAttribute('tabindex', isSelected ? '0' : '-1');
       });
 
-      // Keyboard navigation (Left/Right/Home/End)
-      tabs.forEach((tab, index) => {
-        tab.addEventListener('keydown', (e) => {
-          let newIndex = null;
-          if (e.key === 'ArrowRight') newIndex = (index + 1) % tabs.length;
-          if (e.key === 'ArrowLeft') newIndex = (index - 1 + tabs.length) % tabs.length;
-          if (e.key === 'Home') newIndex = 0;
-          if (e.key === 'End') newIndex = tabs.length - 1;
+      panels.forEach(panel => {
+        const isActive = panel.id === selectedTab.dataset.tab;
+        if (isActive) {
+          panel.classList.add('active');
+          panel.removeAttribute('hidden');
+        } else {
+          panel.classList.remove('active');
+          panel.setAttribute('hidden', '');
+        }
+      });
+      selectedTab.focus();
+    }
 
-          if (newIndex !== null) {
-            e.preventDefault();
-            activateTab(tabs[newIndex]);
-          }
+    tabs.forEach(tab => tab.addEventListener('click', () => activateTab(tab)));
+    
+    // Default activation
+    const initial = tabs.find(t => t.classList.contains('active')) || tabs[0];
+    activateTab(initial);
+
+    // --- 2. SOCIAL MEDIA EMBED LOGIC ---
+    // Data dictionary for your socials. You can easily edit descriptions here!
+    const socialData = {
+      youtube: { title: "YouTube", desc: "Check out my latest animations and video uploads!", color: "#FF0000", link: "https://www.youtube.com/@KattStarz" },
+      discord: { title: "Discord", desc: "Join my community server to chat and hang out!", color: "#5865F2", link: "https://discord.gg/e8GxE4e4Bb" },
+      twitter: { title: "Twitter / X", desc: "Follow me for quick updates, art, and thoughts.", color: "#1DA1F2", link: "https://x.com/KattStarz" },
+      reddit: { title: "Reddit", desc: "Catch my posts and discussions in various communities.", color: "#FF4500", link: "https://www.reddit.com/user/changed_fan/" },
+      tiktok: { title: "TikTok", desc: "Short-form videos, memes, and fun clips.", color: "#00f2fe", link: "https://www.tiktok.com/@kattstarzz" }
+    };
+
+    const socialButtons = document.querySelectorAll('.list-btn');
+    const socialEmbed = document.getElementById('social-embed');
+
+    socialButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const platform = e.currentTarget.dataset.social;
+        const data = socialData[platform];
+        
+        // Populate the embed
+        document.getElementById('social-title').innerText = data.title;
+        document.getElementById('social-desc').innerText = data.desc;
+        document.getElementById('social-link').href = data.link;
+        document.getElementById('social-color').style.backgroundColor = data.color;
+        
+        // Show the embed
+        socialEmbed.style.display = 'flex';
+      });
+    });
+
+    // --- 3. CHARACTERS FETCH LOGIC ---
+    const charListContainer = document.getElementById('character-list');
+    const charEmbed = document.getElementById('char-embed');
+
+    fetch('ocs/characters.json')
+      .then(response => {
+        if (!response.ok) throw new Error("Could not load characters");
+        return response.json();
+      })
+      .then(characters => {
+        characters.forEach(char => {
+          // Create a button for each character
+          const btn = document.createElement('button');
+          btn.className = 'list-btn';
+          btn.innerText = char.name;
+          
+          // Click event to show character details
+          btn.addEventListener('click', () => {
+            document.getElementById('char-title').innerText = char.name;
+            document.getElementById('char-desc').innerText = char.description;
+            document.getElementById('char-color').style.backgroundColor = char.color || '#999';
+            
+            const imgEl = document.getElementById('char-img');
+            imgEl.src = char.image;
+            imgEl.style.display = char.image ? 'block' : 'none'; // Hide if no image
+
+            charEmbed.style.display = 'flex';
+          });
+          
+          charListContainer.appendChild(btn);
         });
-      });
+      })
+      .catch(error => console.log("Character JSON not found or error parsing.", error));
 
-      // Ensure initial state is consistent
-      const initial = tabs.find(t => t.classList.contains('active')) || tabs[0];
-      activateTab(initial);
-    })();
-  </script>
-  <script src="portfolio/portfolio-loader.js"></script>
+  })();
+</script>
+<script src="portfolio/portfolio-loader.js"></script>
 </body>
 </html>
