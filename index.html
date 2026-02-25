@@ -149,42 +149,51 @@
       });
     });
 
-    // --- 3. CHARACTERS FETCH LOGIC ---
-    const charListContainer = document.getElementById('character-list');
-    const charEmbed = document.getElementById('char-embed');
+   // --- Updated CHARACTERS FETCH LOGIC ---
+const charListContainer = document.getElementById('character-list');
+const charEmbed = document.getElementById('char-embed');
 
-    fetch('ocs/characters.json')
-      .then(response => {
-        if (!response.ok) throw new Error("Could not load characters");
-        return response.json();
-      })
-      .then(characters => {
-        characters.forEach(char => {
-          // Create a button for each character
-          const btn = document.createElement('button');
-          btn.className = 'list-btn';
-          btn.innerText = char.name;
-          
-          // Click event to show character details
-          btn.addEventListener('click', () => {
-            document.getElementById('char-title').innerText = char.name;
-            document.getElementById('char-desc').innerText = char.description;
-            document.getElementById('char-color').style.backgroundColor = char.color || '#999';
-            
-            const imgEl = document.getElementById('char-img');
-            imgEl.src = char.image;
-            imgEl.style.display = char.image ? 'block' : 'none'; // Hide if no image
+fetch('ocs/characters.json')
+  .then(response => response.json())
+  .then(characters => {
+    characters.forEach(char => {
+      // Create a button for each character
+      const btn = document.createElement('button');
+      btn.className = 'list-btn';
+      
+      // Create and add the mini avatar
+      const miniImg = document.createElement('img');
+      miniImg.src = char.image || 'ocs/default-avatar.png'; // Fallback image
+      miniImg.className = 'char-avatar-mini';
+      
+      // Add the name text
+      const nameText = document.createElement('span');
+      nameText.innerText = char.name;
+      
+      // Assemble button
+      btn.appendChild(miniImg);
+      btn.appendChild(nameText);
+      
+      // Click event to show character details
+      btn.addEventListener('click', () => {
+        document.getElementById('char-title').innerText = char.name;
+        document.getElementById('char-desc').innerText = char.description;
+        document.getElementById('char-color').style.backgroundColor = char.color || '#999';
+        
+        const imgEl = document.getElementById('char-img');
+        imgEl.src = char.image;
+        imgEl.style.display = char.image ? 'block' : 'none';
 
-            charEmbed.style.display = 'flex';
-          });
-          
-          charListContainer.appendChild(btn);
-        });
-      })
-      .catch(error => console.log("Character JSON not found or error parsing.", error));
-
+        charEmbed.style.display = 'flex';
+      });
+      
+      charListContainer.appendChild(btn);
+    });
+  })
+  .catch(error => console.error("Error loading characters:", error));
   })();
 </script>
 <script src="portfolio/portfolio-loader.js"></script>
 </body>
 </html>
+
