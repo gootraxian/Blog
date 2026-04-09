@@ -8,128 +8,51 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="stylesheet.css">
-  <style>
-    /* Custom Embed Styling (No left stripe) */
-    .discord-embed-nostripe {
-      background-color: #2b2d31; /* Discord dark theme embed color */
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      max-width: 550px;
-    }
-
-    .embed-icon {
-      font-size: 40px;
-      color: #ffffff;
-      flex-shrink: 0;
-      /* If using real images instead of FontAwesome, use these styles on an <img> tag:
-      width: 50px; height: 50px; border-radius: 8px; object-fit: cover; */
-    }
-
-    .embed-content {
-      color: #dbdee1;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .embed-content h3 {
-      color: #ffffff;
-      margin: 0 0 8px 0;
-      font-size: 1.2rem;
-    }
-
-    .embed-content p {
-      margin: 0 0 16px 0;
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-
-    /* Markdown simulation */
-    .embed-content strong {
-      color: #ffffff;
-      font-weight: 600;
-    }
-
-    /* Round Provider Button */
-    .btn-round-pay {
-      display: inline-block;
-      background-color: #5865F2; /* Discord Blurple */
-      color: #ffffff;
-      text-decoration: none;
-      padding: 10px 24px;
-      border-radius: 50px; /* Fully rounded */
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: background-color 0.2s ease;
-    }
-
-    .btn-round-pay:hover {
-      background-color: #4752c4;
-    }
-  </style>
 </head>
 <body>
-<video id="bgVideo" autoplay muted loop playsinline>
-  <source src="bg.mp4" type="video/mp4">
-</video>
-  <div class="tab-content active" id="home" role="tabpanel" aria-labelledby="tab-home-btn">
-    <h2>Welcome to my commissions page!</h2>
-    <p>I am currently offering commissions for <strong>OC icons</strong> and <strong>Minecraft mods</strong>. To request one, please message me on Discord (<strong>kattstarz</strong>) with the details and your transaction ID. If you prefer, feel free to contact me first before purchasing!</p>
-    <p>To view my portfolio, visit my main page at <a href="https://github.io">gootraxian.github.io/Blog/</a> and check the portfolio tab.</p>
-    <p>To browse my mods, you can find them on my <strong>Modrinth</strong> or <strong>CurseForge</strong> pages!</p>
-    
-    <div id="pay-embeds">
+  <video id="bgVideo" autoplay muted loop playsinline>
+    <source src="bg.mp4" type="video/mp4">
+  </video>
+
+  <div class="tab-container">
+    <div class="tab-content active" id="home" role="tabpanel">
+      <h2>Welcome to my commissions page!</h2>
+      <p>I am currently offering commissions for <strong>OC icons</strong> and <strong>Minecraft mods</strong>. To request one, please message me on Discord (<strong>kattstarz</strong>) with the details and your transaction ID. If you prefer, feel free to contact me first before purchasing!</p>
+      <p>To view my portfolio, visit my main page at <a href="https://github.io">gootraxian.github.io/Blog/</a> and check the portfolio tab.</p>
+      <p>To browse my mods, you can find them on my <strong>Modrinth</strong> or <strong>CurseForge</strong> pages!</p>
       
-      <div class="discord-embed-nostripe">
-        <div class="embed-icon">
-          <i class="fas fa-cube"></i>
+      <div id="pay-embeds">
+        
+        <div class="discord-embed-nostripe">
+          <div class="embed-icon">
+            <i class="fas fa-cube"></i>
+          </div>
+          <div class="embed-content">
+            <h3>Minecraft Mods</h3>
+            <p>Commission a custom <strong>Minecraft mod</strong> tailored to your gameplay needs. Message me on Discord first with the details!</p>
+            <div class="payment-action">
+              <span class="price-tag">$10 USD</span>
+              <a href="https://moonpay.hel.io/x/kattomods" target="_blank" class="btn-round-pay">Pay with Hel.io</a>
+            </div>
+          </div>
         </div>
-        <div class="embed-content">
-          <h3>Minecraft Mods</h3>
-          <p>Commission a custom <strong>Minecraft mod</strong> tailored to your gameplay needs. Message me on Discord first with the details!</p>
-          <a href="https://moonpay.hel.io/x/kattomods" target="_blank" class="btn-round-pay">Pay with Hel.io</a>
-        </div>
-      </div>
 
-      <div class="discord-embed-nostripe">
-        <div class="embed-icon">
-          <i class="fas fa-paint-brush"></i>
+        <div class="discord-embed-nostripe">
+          <div class="embed-icon">
+            <i class="fas fa-paint-brush"></i>
+          </div>
+          <div class="embed-content">
+            <h3>OC Icons</h3>
+            <p>Get a high-quality <strong>OC icon</strong> commission. Send over your references and your transaction ID so we can get started!</p>
+            <div class="payment-action">
+              <span class="price-tag">$5 USD</span>
+              <a href="https://moonpay.hel.io/x/kattoicon" target="_blank" class="btn-round-pay">Pay with Hel.io</a>
+            </div>
+          </div>
         </div>
-        <div class="embed-content">
-          <h3>OC Icons</h3>
-          <p>Get a high-quality <strong>OC icon</strong> commission. Send over your references and your transaction ID so we can get started!</p>
-          <a href="https://moonpay.hel.io/x/kattoicon" target="_blank" class="btn-round-pay">Pay with Hel.io</a>
-        </div>
-      </div>
 
+      </div>
     </div>
   </div>
 </body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Thank you!</title>
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="stylesheet.css">
-</head>
-<body>
-<video id="bgVideo" autoplay muted loop playsinline>
-  <source src="bg.mp4" type="video/mp4">
-</video>
-  <div class="tab-content active" id="home" role="tabpanel" aria-labelledby="tab-home-btn">
-    <h2>Welcome to my commissions page!</h2>
-    <p>I am currently offering commissions for **OC icons** and **Minecraft mods**. To request one, please message me on Discord (**kattstarz**) with the details and your transaction ID. If you prefer, feel free to contact me first before purchasing!</p>
-    <p>To view my portfolio, visit my main page at <a href="https://github.io">gootraxian.github.io/Blog/</a> and check the portfolio tab.</p>
-    <p>To browse my mods, you can find them on my <strong>Modrinth</strong> or <strong>CurseForge</strong> pages!</p>
-    <div id="pay-embeds">
-      
-    </div>
-  </div>
 </html>
-
