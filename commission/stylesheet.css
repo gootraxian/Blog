@@ -16,6 +16,16 @@ html, body {
   scrollbar-color: #ffffff40 rgba(0,0,0,0.2);
 }
 
+a {
+  color: #5865F2;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 #bgVideo {
   position: fixed;
   right: 0;
@@ -32,7 +42,8 @@ html, body {
 .tab-container {
   width: 90%;
   max-width: 900px; 
-  height: 85%;
+  height: auto; /* Changed from 85% to auto so it fits the content perfectly */
+  max-height: 85%;
   background: rgba(10, 10, 10, 0.45);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -45,7 +56,6 @@ html, body {
 }
 
 h2 {
-  text-align: center;
   margin: 0 0 20px 0;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -58,18 +68,91 @@ p {
   font-weight: 300;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Custom Discord-style Embeds */
+#pay-embeds {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
+.discord-embed-nostripe {
+  background-color: #2b2d31;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 550px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.embed-icon {
+  font-size: 40px;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.embed-content {
+  color: #dbdee1;
+}
+
+.embed-content h3 {
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+}
+
+.embed-content p {
+  margin: 0 0 16px 0;
+  font-size: 0.95rem;
+}
+
+.embed-content strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Payment Button & Pricing Styles */
+.payment-action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns price and button to the left */
+  gap: 6px; /* Space between price and button */
+  margin-top: 10px;
+}
+
+.price-tag {
+  color: #57F287; /* Discord Success Green */
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.btn-round-pay {
+  background-color: #5865F2; 
+  color: #ffffff;
+  padding: 10px 24px;
+  border-radius: 50px; /* Fully rounded borders */
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-round-pay:hover {
+  background-color: #4752c4;
+  text-decoration: none;
+  transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* Animations */
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.grid-item video { max-height: 360px; }
-
+/* Scrollbar styles */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
@@ -77,8 +160,3 @@ p {
   border-radius: 10px; 
 }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
-
-@media (min-width: 600px) {
-  .grid-item.orientation-landscape { grid-column: span 2; }
-  .grid-item.orientation-portrait { grid-row: span 2; }
-}
