@@ -1,4 +1,10 @@
-# My portfolio website!
+# My website!
 
-Yes, i thought this was the best website host.
-@KattStarzz
+## Contains:
+- A biography
+- My social media
+- Portfolio
+- My OCs
+- My commissions!
+
+Yaya! @Kattosaurus
