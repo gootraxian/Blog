@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Commissions | Katto dot online</title>
+  <link rel="icon" href="favicon.ico">
+  <style>
+    :root {
+      --bg-color: #121212;
+      --header-bg: #000000;
+      --text-main: #ffffff;
+      --text-muted: #ffffff9a;
+      --prof-bg: #ffffff36;
+      --star-color: #ffffff;
+      --star-opacity-min: 0.4;
+      --star-filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.9));
+      --btn-bg: #ffffff20;
+      --btn-text: #ffffff;
+      --dropdown-shadow: rgba(0, 0, 0, 0.5);
+      --colored-button: #434ed4;
+      --card-bg: #1a1a1a;
+      --card-border: #ffffff15;
+      --section-bg: #ffffff08;
+      --price-green: #57F287;
+      --price-red: #ff4747;
+      --blur-purple: #5865F2;
+    }
+
+    [data-theme="light"] {
+      --bg-color: #f0f0f0;
+      --header-bg: #e0e0e0;
+      --text-main: #121212;
+      --text-muted: #1212129a;
+      --prof-bg: #0000001a;
+      --star-color: #4a5568;
+      --star-opacity-min: 0.3;
+      --star-filter: drop-shadow(0 0 2px rgba(74, 85, 104, 0.5));
+      --btn-bg: #00000015;
+      --btn-text: #121212;
+      --dropdown-shadow: rgba(0, 0, 0, 0.1);
+      --colored-button: #151b68;
+      --card-bg: #ffffff;
+      --card-border: #00000015;
+      --section-bg: #00000008;
+      --price-green: #2a9d4a;
+      --price-red: #d32f2f;
+      --blur-purple: #3b42b0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background-color: var(--bg-color);
+      transition: background-color 0.3s ease;
+      font-family: system-ui, -apple-system, sans-serif;
+      color: var(--text-main);
+      padding-top: 60px;
+    }
+
+    h1, h2, h3, h4 { margin: 0; }
+    p { font-weight: 300; line-height: 1.6; }
+
+    /* Controls */
+    .controls {
+      position: fixed;
+      top: 15px;
+      left: 0;
+      right: 15px;
+      display: flex;
+      gap: 10px;
+      z-index: 20;
+    }
+
+    .control-btn {
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background-color 0.2s, color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+      font-family: inherit;
+    }
+
+    .control-btn:hover { background-color: var(--prof-bg); }
+
+    .burger {
+      color: var(--btn-text);
+      padding: 8px 15px;
+      background-color: transparent;
+      border: none;
+      margin-right: auto;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      border-radius: 6px;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s;
+      font-family: inherit;
+    }
+
+    .burger:hover { background-color: var(--btn-bg); }
+
+    /* Dropdown */
+    .dropdown {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 60px;
+      left: 15px;
+      background-color: var(--header-bg);
+      min-width: 180px;
+      border-radius: 8px;
+      box-shadow: 0px 8px 24px var(--dropdown-shadow);
+      border: 1px solid var(--btn-bg);
+      overflow: hidden;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px) scale(0.98);
+      pointer-events: none;
+      transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease, border 0.3s ease;
+    }
+
+    .dropdown.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .dropdown a {
+      color: var(--text-main);
+      padding: 12px 16px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background-color 0.2s, color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .dropdown a:hover { background-color: var(--prof-bg); }
+
+    .dropdown .separator {
+      height: 1px;
+      background-color: var(--btn-bg);
+      margin: 4px 0;
+    }
+
+    /* Commission Content */
+    .tab-container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 20px 60px;
+      animation: slideUp 0.6s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tab-container h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .intro-text {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .intro-text a { color: var(--colored-button); text-decoration: none; }
+    .intro-text a:hover { text-decoration: underline; }
+
+    /* TOS Section */
+    .tos-section {
+      background: var(--section-bg);
+      padding: 25px;
+      border-radius: 18px;
+      margin-bottom: 2rem;
+      border: 1px solid var(--card-border);
+    }
+
+    .tos-section h3 {
+      font-size: 1.1rem;
+      color: var(--blur-purple);
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .tos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .tos-item h4 {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .tos-item p, .tos-item li {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+      list-style: none;
+    }
+
+    .prohibited { color: var(--price-red) !important; }
+    .highlight { color: var(--price-green) !important; font-weight: 600; }
+
+    /* Section Tabs (Art / Software) */
+    .section-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .section-tab {
+      flex: 1;
+      min-width: 120px;
+      background: var(--btn-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 12px;
+      border-radius: 14px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: 0.5px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .section-tab:hover {
+      background: var(--prof-bg);
+      color: var(--text-main);
+    }
+
+    .section-tab.active {
+      background: var(--blur-purple);
+      border-color: var(--blur-purple);
+      color: #fff;
+    }
+
+    .category-panel { display: none; }
+    .category-panel.active { display: block; animation: fadeIn 0.4s ease forwards; }
+
+    /* Detail-level switch */
+    .level-switch {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .level-btn {
+      flex: 1;
+      min-width: 90px;
+      background: var(--btn-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 10px;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .level-btn:hover {
+      background: var(--prof-bg);
+      color: var(--text-main);
+    }
+
+    .level-btn.active {
+      background: var(--price-green);
+      border-color: var(--price-green);
+      color: #1c1c1c;
+    }
+
+    .level-group { display: none; }
+    .level-group.active { display: flex; flex-direction: row; gap: 20px; width: 100%; flex-wrap: wrap; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cards */
+    .pay-embeds {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 1rem;
+      width: 100%;
+    }
+
+    .modern-card {
+      flex: 1;
+      min-width: 220px;
+      position: relative;
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border: 1px solid var(--card-border);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .modern-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px var(--dropdown-shadow);
+      border-color: var(--prof-bg);
+    }
+
+    .card-body h3 {
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    .card-body p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      min-height: 60px;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .price-tag {
+      font-weight: 600;
+      color: var(--price-green);
+      font-size: 1.2rem;
+    }
+
+    .price-tag.unavailable-price {
+      color: var(--price-red);
+      font-size: 1.05rem;
+    }
+
+    .btn-pay {
+      background: var(--blur-purple);
+      color: white;
+      text-decoration: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      width: 100%;
+      text-align: center;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-pay:hover {
+      background: #4752c4;
+      transform: scale(1.03);
+    }
+
+    .modern-card.is-locked > * {
+      filter: blur(3px);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .unavailable-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 5;
+    }
+
+    .unavailable-badge {
+      background: rgba(255, 71, 71, 0.15);
+      border: 1px solid var(--price-red);
+      color: var(--price-red);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      border-radius: 12px;
+      transform: rotate(-6deg);
+    }
+
+    .footer-note {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      opacity: 0.5;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .footer-note a { color: inherit; }
+
+    @media (max-width: 800px) {
+      .pay-embeds, .level-group.active { flex-direction: column; }
+      .tos-grid { grid-template-columns: 1fr; }
+      .tab-container { padding: 20px 16px 50px; }
+      .section-tabs, .level-switch { flex-wrap: wrap; }
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--btn-bg); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--prof-bg); }
+  </style>
+</head>
+<body>
+
+  <div class="controls">
+    <button id="burger" class="burger" onclick="toggleDropdown()">≡</button>
+    <button id="theme-toggle" class="control-btn" data-en="Theme" data-es="Tema">Theme</button>
+    <button id="lang-toggle" class="control-btn">EN</button>
+  </div>
+
+  <div class="dropdown" id="dropmeow">
+    <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+    <a href="index.html#about" data-en="About myself" data-es="Sobre mí">About myself</a>
+    <a href="index.html#services" data-en="My services" data-es="Mis servicios">My services</a>
+    <a href="portfolio.html" data-en="Portfolio" data-es="Portafolio">Portfolio</a>
+    <a href="commission.html" data-en="Commission me" data-es="Comisiones">Commission me</a>
+    <div class="separator"></div>
+    <a href="characters.html" data-en="My characters" data-es="Mis personajes">My characters</a>
+  </div>
+
+  <div class="tab-container">
+    <h2 data-en="Commissions" data-es="Comisiones">Commissions</h2>
+    <p class="intro-text" data-en="Artifacts and software by <strong>Katt</strong>. Contact via Discord: <strong>@exp009</strong>, or via email: <strong>whatever@katto.online</strong>" data-es="Arte y software por <strong>Katt</strong>. Contacto por Discord: <strong>@exp009</strong>, o por email: <strong>whatever@katto.online</strong>">Artifacts and software by <strong>Katt</strong>. Contact via Discord: <strong>@kattstarz</strong>, or via email: <strong>mail.kattstarzz@gmail.com</strong></p>
+
+    <div class="tos-section">
+      <h3 data-en="Terms of Service" data-es="Términos de Servicio">Terms of Service</h3>
+      <div class="tos-grid">
+        <div class="tos-item">
+          <h4 data-en="Content Policy" data-es="Política de Contenido">Content Policy</h4>
+          <ul>
+            <li class="prohibited">• No Explicit NSFW / Fetish</li>
+            <li class="prohibited">• Zero tolerance: Zoophilia, Pedophilia, Heavy Gore</li>
+            <li>• <span class="highlight">Accepted:</span> Romantic themes, suggestive poses</li>
+            <li>• <span class="highlight">Accepted:</span> Stylized "soft" gore (scratches, missing limbs)</li>
+          </ul>
+        </div>
+        <div class="tos-item">
+          <h4 data-en="Software & Mods" data-es="Software y Mods">Software & Mods</h4>
+          <p data-en="Mods are built for specific versions (e.g. 1.20.1). I am not liable for breakages caused by future game updates or third-party mod conflicts." data-es="Los mods se construyen para versiones específicas (ej. 1.20.1). No soy responsable de roturas causadas por actualizaciones futuras del juego o conflictos con mods de terceros.">Mods are built for specific versions (e.g. 1.20.1). I am not liable for breakages caused by future game updates or third-party mod conflicts.</p>
+        </div>
+        <div class="tos-item">
+          <h4 data-en="Rights & Usage" data-es="Derechos y Uso">Rights & Usage</h4>
+          <p data-en="Personal use only. I retain full copyright and the right to showcase work. <strong>No AI training or NFT usage permitted.</strong>" data-es="Solo uso personal. Retengo los derechos de autor completos y el derecho a exhibir el trabajo. <strong>No se permite entrenamiento de IA ni uso de NFT.</strong>">Personal use only. I retain full copyright and the right to showcase work. <strong>No AI training or NFT usage permitted.</strong></p>
+        </div>
+        <div class="tos-item">
+          <h4 data-en="Legacy Support" data-es="Soporte Legacy">Legacy Support</h4>
+          <p data-en="Returning clients receive updates (ports, outfit changes, code tweaks) for <span class="highlight">75% or less</span> of the original price." data-es="Los clientes recurrentes reciben actualizaciones (ports, cambios de outfit, ajustes de código) por <span class="highlight">75% o menos</span> del precio original.">Returning clients receive updates (ports, outfit changes, code tweaks) for <span class="highlight">75% or less</span> of the original price.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="section-tabs">
+      <button class="section-tab active" data-target="panel-art" data-en="Art" data-es="Arte">Art</button>
+      <button class="section-tab" data-target="panel-software" data-en="Software" data-es="Software">Software</button>
+    </div>
+
+    <!-- ================= ART PANEL ================= -->
+    <div class="category-panel active" id="panel-art">
+
+      <div class="level-switch" data-group="art">
+        <button class="level-btn active" data-level="sketch" data-en="Sketch" data-es="Boceto">Sketch</button>
+        <button class="level-btn" data-level="lineart" data-en="Line Art" data-es="Line Art">Line Art</button>
+        <button class="level-btn" data-level="colored" data-en="Colored" data-es="Color">Colored</button>
+        <button class="level-btn" data-level="render" data-en="Render" data-es="Render">Render</button>
+      </div>
+
+      <!-- Sketch -->
+      <div class="level-group active" data-group="art" data-level="sketch">
+        <div class="modern-card">
+          <div class="card-body">
+            <h3 data-en="Headshot" data-es="Retrato">Headshot</h3>
+            <p data-en="Quick rough sketch of your character's head/shoulders." data-es="Boceto rápido de la cabeza/hombros de tu personaje.">Quick rough sketch of your character's head/shoulders.</p>
+            <div class="card-footer">
+              <span class="price-tag">2 USD</span>
+              <a href="https://moonpay.hel.io/pay/6a307fb6fc5661118e8b5700" target="_blank" class="btn-pay" data-en="Purchase via Hel.io" data-es="Comprar via Hel.io">Purchase via Hel.io</a>
+            </div>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="card-body">
+            <h3 data-en="Hips & Up" data-es="Caderas para arriba">Hips & Up</h3>
+            <p data-en="Rough sketch from the hips up." data-es="Boceto rápido desde las caderas para arriba.">Rough sketch from the hips up.</p>
+            <div class="card-footer">
+              <span class="price-tag">5 USD</span>
+              <a href="https://moonpay.hel.io/x/kattoicon" target="_blank" class="btn-pay" data-en="Purchase via Hel.io" data-es="Comprar via Hel.io">Purchase via Hel.io</a>
+            </div>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="card-body">
+            <h3 data-en="Full Body" data-es="Cuerpo completo">Full Body</h3>
+            <p data-en="Rough full body sketch." data-es="Boceto rápido de cuerpo completo.">Rough full body sketch.</p>
+            <div class="card-footer">
+              <span class="price-tag">8 USD</span>
+              <a href="https://moonpay.hel.io/pay/6a30803bc6ada42e3f75c1b7" target="_blank" class="btn-pay" data-en="Purchase via Hel.io" data-es="Comprar via Hel.io">Purchase via Hel.io</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Line Art -->
+      <div class="level-group" data-group="art" data-level="lineart">
+        <div class="modern-card">
+          <div class="card-body">
+            <h3 data-en="Headshot" data-es="Retrato">Headshot</h3>
+            <p data-en="Clean inked headshot, no color." data-es="Retrato limpio entintado, sin color.">Clean inked headshot, no color.</p>
+            <div class="card-footer">
+              <span class="price-tag">5 USD</span>
+              <a href="https://moonpay.hel.io/x/kattoicon" target="_blank" class="btn-pay" data-en="Purchase via Hel.io" data-es="Comprar via Hel.io">Purchase via Hel.io</a>
+            </div>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="card-body">
+            <h3 data-en="Hips & Up" data-es="Caderas para arriba">Hips & Up</h3>
+            <p data-en="Clean inked hips-and-up piece, no color." data-es="Pieza limpia entintada de caderas para arriba, sin color.">Clean inked hips-and-up piece, no color.</p>
+            <div class="card-footer">
+              <span class="price-tag">8 USD</span>
+              <a href="https://moonpay.hel.io/pay/6a30803bc6ada42e3f75c1b7" target="_blank" class="btn-pay" data-en="Purchase via Hel.io" data-es="Comprar via Hel.io">Purchase via Hel.io</a>
+            </div>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="card-body">
+            <h3 data-en="Full Body" data-es="Cuerpo completo">Full Body</h3>
+            <p data-en="Clean inked full body piece, no color." data-es="Pieza limpia entintada de cuerpo completo, sin color.">Clean inked full body piece, no color.</p>
+            <div class="card-footer">
+              <span class="price-tag">12 USD</span>
+              <a href="https://moonpay.hel.io/pay/6a3080a003b432803d92a772" target="_blank" class="btn-pay" data-en="Purchase via Hel.io" data-es="Comprar via Hel.io">Purchase via Hel.io</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colored -->
+      <div class="level-group" data-group="art" data-level="colored">
+        <div class="modern-card">
+          <div class="card-body">
+            <h3 data-en="Headshot" data-es="Retrato">Headshot</h3>
+            <p data-en="Fully colored headshot with flat or simple shading." data-es="Retrato completamente coloreado con sombreado plano o simple.">Fully colored headshot with flat or simple shading.</p>
+            <div class="card-footer">
+              <span class="price-tag">8 USD</span>
+              <a href="https://moonpay.hel.io/pay/6a30803bc6ada42e3f75c1b7" target="_blank" class="btn-pay" data-en="Purchase via Hel.io" data-es="Comprar via Hel.io">Purchase via Hel.io</a>
+            </div>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="card-body">
+            <h3 data-en="Hips & Up" data-es="Caderas para arriba">Hips & Up</h3>
+            <p data-en="Fully colored hips-and-up piece with flat or simple shading." data-es="Pieza coloreada de caderas para arriba con sombreado plano o simple.">Fully colored hips-and-up piece with flat or simple shading.</p>
+            <div class="card-footer">
+              <span class="price-tag">12 USD</span>
+              <a href="https://moonpay.hel.io/pay/6a3080a003b432803d92a772" target="_blank" class="btn-pay" data-en="Purchase via Hel.io" data-es="Comprar via Hel.io">Purchase via Hel.io</a>
+            </div>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="card-body">
+            <h3 data-en="Full Body" data-es="Cuerpo completo">Full Body</h3>
+            <p data-en="Fully colored full body piece with flat or simple shading." data-es="Pieza coloreada de cuerpo completo con sombreado plano o simple.">Fully colored full body piece with flat or simple shading.</p>
+            <div class="card-footer">
+              <span class="price-tag">15 USD</span>
+              <a href="https://moonpay.hel.io/pay/6a3083ae582f6261ef120211" target="_blank" class="btn-pay" data-en="Purchase via Hel.io" data-es="Comprar via Hel.io">Purchase via Hel.io</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Render -->
+      <div class="level-group" data-group="art" data-level="render">
+        <div class="modern-card is-locked">
+          <div class="card-body">
+            <h3 data-en="Headshot" data-es="Retrato">Headshot</h3>
+            <p data-en="Fully rendered headshot with detailed shading and lighting." data-es="Retrato completamente renderizado con sombreado e iluminación detallados.">Fully rendered headshot with detailed shading and lighting.</p>
+            <div class="card-footer">
+              <span class="price-tag unavailable-price" data-en="Not Available" data-es="No Disponible">Not Available</span>
+              <a href="#" class="btn-pay" data-en="Purchase via Hel.io" data-es="Comprar via Hel.io">Purchase via Hel.io</a>
+            </div>
+          </div>
+          <div class="unavailable-overlay"><span class="unavailable-badge" data-en="Unavailable" data-es="No Disponible">Unavailable</span></div>
+        </div>
+        <div class="modern-card">
+          <div class="card-body">
+            <h3 data-en="Hips & Up" data-es="Caderas para arriba">Hips & Up</h3>
+            <p data-en="Fully rendered hips-and-up piece. Price varies with complexity." data-es="Pieza renderizada de caderas para arriba. El precio varía según complejidad.">Fully rendered hips-and-up piece. Price varies with complexity.</p>
+            <div class="card-footer">
+              <span class="price-tag" data-en="Depends" data-es="Depende">Depends</span>
+              <a href="https://discord.com/users/kattstarz" target="_blank" class="btn-pay" data-en="Inquire via Discord" data-es="Consultar por Discord">Inquire via Discord</a>
+            </div>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="card-body">
+            <h3 data-en="Full Body" data-es="Cuerpo completo">Full Body</h3>
+            <p data-en="Fully rendered full body piece. Minimum price shown, varies with complexity." data-es="Pieza renderizada de cuerpo completo. Precio mínimo mostrado, varía según complejidad.">Fully rendered full body piece. Minimum price shown, varies with complexity.</p>
+            <div class="card-footer">
+              <span class="price-tag">30 USD min.</span>
+              <a href="https://moonpay.hel.io/pay/6a308430b22f6e201b79663b" target="_blank" class="btn-pay" data-en="Purchase via Hel.io" data-es="Comprar via Hel.io">Purchase via Hel.io</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add-ons -->
+      <div class="tos-section" style="margin-top: 1rem;">
+        <h3 data-en="Add-ons" data-es="Extras">Add-ons</h3>
+        <div class="tos-grid">
+          <div class="tos-item">
+            <h4 data-en="Backgrounds" data-es="Fondos">Backgrounds</h4>
+            <ul>
+              <li>• <span data-en="Simple: " data-es="Simple: ">Simple: </span><span class="highlight">+5 USD</span></li>
+              <li>• <span data-en="Detailed (a bit): " data-es="Detallado (un poco): ">Detailed (a bit): </span><span class="highlight">+8 USD</span></li>
+            </ul>
+          </div>
+          <div class="tos-item">
+            <h4 data-en="Extra Characters" data-es="Personajes Extra">Extra Characters</h4>
+            <p><span class="highlight">+5 USD</span> <span data-en="per additional character." data-es="por personaje adicional.">per additional character.</span></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= SOFTWARE PANEL ================= -->
+    <div class="category-panel" id="panel-software">
+      <div class="pay-embeds" id="pay-embeds"></div>
+    </div>
+
+    <p class="footer-note">
+      <span data-en="Detailed Portfolio: " data-es="Portafolio Detallado: ">Detailed Portfolio: </span>
+      <a href="https://kattosaurus.github.io/Blog/" target="_blank">kattosaurus.github.io/Blog/</a>
+    </p>
+  </div>
+
+  <script>
+    /* ── Language & Theme ── */
+    let currentLang = 'en';
+
+    const langBtn = document.getElementById('lang-toggle');
+    langBtn.addEventListener('click', () => {
+      currentLang = currentLang === 'en' ? 'es' : 'en';
+      langBtn.textContent = currentLang.toUpperCase();
+      document.querySelectorAll('[data-en]').forEach(el => {
+        const newText = el.getAttribute(`data-${currentLang}`);
+        if (newText) {
+          if (el.tagName === 'A' && el.classList.contains('btn-pay')) {
+            el.textContent = newText;
+          } else if (el.children.length === 0) {
+            el.textContent = newText;
+          } else {
+            const hasComplexChildren = Array.from(el.children).some(c => 
+              !c.classList.contains('highlight') && !c.classList.contains('prohibited')
+            );
+            if (!hasComplexChildren) {
+              const onlySpecialSpans = Array.from(el.children).every(c => 
+                c.tagName === 'SPAN' && (c.classList.contains('highlight') || c.classList.contains('prohibited'))
+              );
+              if (onlySpecialSpans || el.children.length === 0) {
+                const firstChild = el.firstChild;
+                if (firstChild && firstChild.nodeType === Node.TEXT_NODE) {
+                  firstChild.textContent = newText;
+                } else if (el.children.length === 0) {
+                  el.textContent = newText;
+                }
+              }
+            }
+          }
+        }
+      });
+    });
+
+    const themeBtn = document.getElementById('theme-toggle');
+    themeBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+    });
+
+    /* ── Dropdown ── */
+    function toggleDropdown() {
+      document.getElementById("dropmeow").classList.toggle("show");
+    }
+    window.onclick = function(event) {
+      if (!event.target.matches('.burger')) {
+        var dropdowns = document.getElementsByClassName("dropdown");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    };
+
+    /* ── Commission Logic ── */
+    const products = [
+      {
+        name: 'Mod Commission',
+        price: '10 USD',
+        url: 'https://moonpay.hel.io/x/kattomods',
+        desc: 'Custom logic or your **OC inside Changed Extras**. Includes modeling, texturing, and implementation.',
+        image: 'mod.png',
+        unavailable: true
+      }
+    ];
+
+    function renderCards() {
+      const container = document.getElementById('pay-embeds');
+      products.forEach(prod => {
+        const card = document.createElement('div');
+        card.className = 'modern-card' + (prod.unavailable ? ' is-locked' : '');
+        const cleanDesc = prod.desc.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        const priceTagClass = prod.unavailable ? 'price-tag unavailable-price' : 'price-tag';
+        const priceLabel = prod.unavailable ? 'Not Available' : prod.price;
+        const overlay = prod.unavailable ? '<div class="unavailable-overlay"><span class="unavailable-badge">Unavailable</span></div>' : '';
+
+        card.innerHTML = `
+          <div class="card-body">
+            <h3>${prod.name}</h3>
+            <p>${cleanDesc}</p>
+            <div class="card-footer">
+              <span class="${priceTagClass}">${priceLabel}</span>
+              <a href="${prod.url}" target="_blank" class="btn-pay">Purchase via Hel.io</a>
+            </div>
+          </div>
+          ${overlay}
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCards);
+
+    // Section tab switching (Art / Software)
+    document.querySelectorAll('.section-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.category-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.target).classList.add('active');
+      });
+    });
+
+    // Detail-level switching
+    document.querySelectorAll('.level-switch').forEach(switcher => {
+      const group = switcher.dataset.group;
+      const buttons = switcher.querySelectorAll('.level-btn');
+      const groups = document.querySelectorAll(`.level-group[data-group="${group}"]`);
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          buttons.forEach(b => b.classList.remove('active'));
+          groups.forEach(g => g.classList.remove('active'));
+          btn.classList.add('active');
+          document.querySelector(`.level-group[data-group="${group}"][data-level="${btn.dataset.level}"]`).classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

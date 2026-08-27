@@ -1,195 +1,602 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Katt's thingies</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="Style.css">
-</head>
-<body>
-<video id="bgVideo" autoplay muted loop playsinline>
-  <source src="videos/bg.mp4" type="video/mp4">
-</video>
-
-<div class="tab-container">
-  <div class="tabs" role="tablist" aria-label="Main tabs">
-    <button id="tab-home-btn" class="tab active" role="tab" aria-controls="home" aria-selected="true" tabindex="0" data-tab="home">Home</button>
-    <button id="tab-about-btn" class="tab" role="tab" aria-controls="about" aria-selected="false" tabindex="-1" data-tab="about">Social Media</button>
-    <button id="tab-chars-btn" class="tab" role="tab" aria-controls="characters" aria-selected="false" tabindex="-1" data-tab="characters">Characters</button>
-    <button id="tab-contact-btn" class="tab" role="tab" aria-controls="contact" aria-selected="false" tabindex="-1" data-tab="contact">Portfolio & Contact</button>
-  </div>
-
-  <div class="tab-content active" id="home" role="tabpanel" aria-labelledby="tab-home-btn">
-    <h2>Hiya! Welcome to my website, I have a description of myself for you:</h2>
-    <p>Hi! I’m Katto. Depending on where you met me or how long you have known me, you might also know me by my other aliases: Kattosaurus, Kattstarz, Void, Fashui, Conekat, or Cattleox.
-​I currently reside in Mexico. Academically, I am working toward a career in pathology, with a long-term goal of founding my own company.
-​I am a multi-disciplinary creator with a strong focus on technology. My hobbies and skills include tech and development, where I am passionate about animation, 3D modeling, and coding, often working on projects like modding and game development. I am also very involved in gaming, particularly in sandbox titles like Roblox, Minecraft, and VRChat. Biology and science are major areas of study for me, which tie directly into my interest in the medical field. Additionally, I am an avid reader and a big fan of the Warrior Cats book series. Finally, I am active in the cosplay community, and I firmly believe that fursuiting is a valid and expressive form of the craft.
-​My favorite color is turquoise (specifically around #81e3c9) and my favorite food is lasagna. I do not enjoy sports, with the sole exception of swimming. I am sometimes not very social, and I am aware that I may inadvertently cause friction or misunderstandings.
-​I aim to grow and improve my communication. If I ever offend you or cause a problem, please tell me exactly why. It helps me learn, and you are always welcome to refer back to this description to better understand who I am.</p>
-    
-    <div class="info-listings">
-      <p class="listing"><strong>Pronouns:</strong> Any</p>
-      <p class="listing"><strong>Gender Identity:</strong> Non-binary</p>
-      <p class="listing"><strong>Sexuality:</strong> Bisexual</p>
-    </div>
-  </div>
-
-  <div class="tab-content" id="about" role="tabpanel" aria-labelledby="tab-about-btn" hidden>
-    <h2>Social Media</h2>
-    <div class="split-layout">
-      <div class="list-pane">
-        <p>Select a platform to view details:</p>
-        <div class="social-links" id="social-buttons">
-          <button class="list-btn" data-social="youtube"><i class="fab fa-youtube"></i> YouTube</button>
-          <button class="list-btn" data-social="discord"><i class="fab fa-discord"></i> Discord</button>
-          <button class="list-btn" data-social="twitter"><i class="fab fa-twitter"></i> Twitter / X</button>
-          <button class="list-btn" data-social="reddit"><i class="fab fa-reddit"></i> Reddit</button>
-          <button class="list-btn" data-social="tiktok"><i class="fab fa-tiktok"></i> TikTok</button>
-        </div>
-      </div>
-      
-      <div class="preview-pane">
-        <div id="social-embed" class="discord-embed" style="display: none;">
-          <div class="embed-color-pill" id="social-color"></div>
-          <div class="embed-content">
-            <h3 id="social-title">Platform Name</h3>
-            <p id="social-desc">Information about this social media profile goes here.</p>
-            <a id="social-link" href="#" target="_blank" class="embed-btn">View Profile</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="tab-content" id="characters" role="tabpanel" aria-labelledby="tab-chars-btn" hidden>
-    <h2>Characters</h2>
-    <div class="split-layout">
-      <div class="list-pane">
-        <p>Select a character:</p>
-        <div class="social-links" id="character-list">
-          </div>
-      </div>
-      
-      <div class="preview-pane">
-        <div id="char-embed" class="discord-embed" style="display: none;">
-          <div class="embed-color-pill" id="char-color"></div>
-          <div class="embed-content">
-            <h3 id="char-title">Character Name</h3>
-            <p id="char-desc">Character description will appear here.</p>
-            <img id="char-img" src="" alt="Character Image" class="embed-image">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="tab-content" id="contact" role="tabpanel" aria-labelledby="tab-contact-btn" hidden>
-    <h2>Portfolio & Contact</h2>
-    <p>This page contains both my portfolio! for commissions message me in discord (@kattstarz)</p>
-    <div class="grid-container" aria-live="polite"></div>
-  </div>
-</div>
-
-<script>
-  (function () {
-    const tabs = Array.from(document.querySelectorAll('.tab'));
-    const panels = Array.from(document.querySelectorAll('.tab-content'));
-
-    function activateTab(selectedTab) {
-      tabs.forEach(tab => {
-        const isSelected = tab === selectedTab;
-        tab.classList.toggle('active', isSelected);
-        tab.setAttribute('aria-selected', isSelected ? 'true' : 'false');
-        tab.setAttribute('tabindex', isSelected ? '0' : '-1');
-      });
-
-      panels.forEach(panel => {
-        const isActive = panel.id === selectedTab.dataset.tab;
-        if (isActive) {
-          panel.classList.add('active');
-          panel.removeAttribute('hidden');
-        } else {
-          panel.classList.remove('active');
-          panel.setAttribute('hidden', '');
-        }
-      });
-      selectedTab.focus();
+  <title>Katto dot online</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --header-bg: #000000;
+      --text-main: #ffffff;
+      --text-muted: #ffffff9a;
+      --prof-bg: #ffffff36;
+      --star-color: #ffffff;
+      --star-opacity-min: 0.4;
+      --star-filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.9));
+      --btn-bg: #ffffff20;
+      --btn-text: #ffffff;
+      --dropdown-shadow: rgba(0, 0, 0, 0.5);
+      --colored-button: #434ed4
     }
 
-    tabs.forEach(tab => tab.addEventListener('click', () => activateTab(tab)));
+    [data-theme="light"] {
+      --bg-color: #f0f0f0;
+      --header-bg: #e0e0e0;
+      --text-main: #121212;
+      --text-muted: #1212129a;
+      --prof-bg: #0000001a;
+      --star-color: #4a5568;
+      --star-opacity-min: 0.3;
+      --star-filter: drop-shadow(0 0 2px rgba(74, 85, 104, 0.5));
+      --btn-bg: #00000015;
+      --btn-text: #121212;
+      --dropdown-shadow: rgba(0, 0, 0, 0.1);
+      --colored-button: #151b68
+    }
 
-    const initial = tabs.find(t => t.classList.contains('active')) || tabs[0];
-    activateTab(initial);
+    html {
+      scroll-behavior: smooth;
+    }
 
-    const socialData = {
-      youtube: { title: "YouTube", desc: "My latest public art pieces and other art or game development content.", color: "#FF0000", link: "https://www.youtube.com/@KattStarz" },
-      discord: { title: "Discord", desc: "Hello! this is my community (not really) and my bot's support server!", color: "#5865F2", link: "https://discord.gg/e8GxE4e4Bb" },
-      twitter: { title: "Twitter / X", desc: "I almost never use twitter, but if you want... You can follow me here!", color: "#1DA1F2", link: "https://x.com/Kattosauruz" },
-      reddit: { title: "Reddit", desc: "My reddit account! I'm not very active but I sometimes get on!", color: "#FF4500", link: "https://www.reddit.com/user/changed_fan/" },
-      tiktok: { title: "TikTok", desc: "Almost the same content as youtube!", color: "#00f2fe", link: "https://www.tiktok.com/@kattosaurus" }
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: var(--bg-color); 
+      transition: background-color 0.3s ease;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    
+    h1 {
+      margin: 0;
+    }
+
+    p {
+      font-weight: 300;
+    }
+
+    .amp {
+      font-size: 15px;
+    }
+
+    .controls {
+      position: absolute;
+      top: 15px;
+      left: 0;
+      right: 15px;
+      display: flex;
+      gap: 10px;
+      z-index: 20; 
+    }
+
+    .control-btn {
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      transition: background-color 0.2s, color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .control-btn:hover {
+      background-color: var(--prof-bg);
+    }
+
+    /* Dropdown with smooth transition */
+    .dropdown {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 15px;
+      background-color: var(--header-bg);
+      min-width: 180px;
+      border-radius: 8px;
+      box-shadow: 0px 8px 24px var(--dropdown-shadow);
+      border: 1px solid var(--btn-bg);
+      overflow: hidden;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px) scale(0.98);
+      pointer-events: none;
+      transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease, border 0.3s ease;
+    }
+
+    .dropdown.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .dropdown a {
+      color: var(--text-main);
+      padding: 12px 16px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background-color 0.2s, color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .dropdown a:hover {
+      background-color: var(--prof-bg);
+    }
+
+    .dropdown .separator {
+      height: 1px;
+      background-color: var(--btn-bg);
+      margin: 4px 0;
+    }
+
+    .your {
+      font-weight: 300;
+      color: var(--text-muted);
+      z-index: 1; 
+      transition: color 0.3s ease;
+    }
+
+    .profs {
+      color: var(--text-main);
+      display: inline-block;
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s, color 0.3s;
+      background-color: var(--prof-bg);
+      padding: 10px;
+      z-index: 1; 
+    }
+
+    .header-wrapper {
+      width: 100%;
+    }
+
+    .header {
+      background-color: var(--header-bg);
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center; 
+      text-align: center;   
+      gap: 5px;
+      padding-top: 80px; 
+      padding-bottom: 40px;
+      position: relative; 
+      overflow: hidden; 
+      transition: background-color 0.3s ease;
+    }
+    
+    .spinny {
+      overflow: hidden;
+      width: 100%;
+      height: 70px; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .exit {
+      opacity: 1;
+      transform: translateY(60px);
+    }
+
+    .enter {
+      opacity: 1;
+      transform: translateY(-60px);
+      transition: none !important;
+    }
+
+    .star {
+      position: absolute;
+      background-color: var(--star-color);
+      border-radius: 50%;
+      pointer-events: none; 
+      will-change: transform, opacity;
+      transform: translate3d(0,0,0);
+      filter: var(--star-filter);
+      animation: brightTwinkleMove var(--duration) infinite ease-in-out;
+      transition: background-color 0.3s, filter 0.3s;
+    }
+
+    @keyframes brightTwinkleMove {
+      0%, 100% {
+        opacity: var(--star-opacity-min);
+        transform: translate3d(0, 0, 0) scale(0.8);
+      }
+      50% {
+        opacity: 1;
+        transform: translate3d(var(--move-x), var(--move-y), 0) scale(1.2);
+      }
+    }
+
+    @media (hover: hover) {
+      .header:hover .star {
+        filter: drop-shadow(0 0 4px var(--star-color));
+      }
+    }
+
+    @media (min-width: 768px) {
+      p, .amp {
+        font-size: 18px;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      p, .amp {
+        font-size: 20px;
+      }
+    }
+
+    .burger {
+      color: var(--btn-text);
+      padding: 8px 15px;
+      background-color: #00000000;
+      border: none;
+      margin-right: auto;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      border-radius: 6px;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s;
+    }
+
+    .burger:hover {
+      background-color: var(--btn-bg);
+    }
+
+    #about {
+      margin-top: 40px;
+      padding: 20px; 
+      color: var(--text-main);
+    }
+
+    #services {
+      margin-top: 50px; 
+      padding: 20px;
+      color: var(--text-main);
+      padding-bottom: 50px; 
+    }
+
+    .aboutmeimg {
+      max-width: 100%;
+      max-height: 300px;
+      display: block;
+    }
+
+    .aboutmes {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Carousel styles */
+    .carousel-wrapper {
+      position: relative;
+      width: 100%;
+      padding: 0 50px;
+      box-sizing: border-box;
+      margin-top: 20px;
+    }
+
+    .carousel-track-container {
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      width: 100%;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      box-sizing: border-box;
+      padding: 0 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background-color 0.2s, color 0.2s, transform 0.2s;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    .carousel-btn:hover {
+      background-color: var(--prof-bg);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-btn:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .carousel-prev {
+      left: 5px;
+    }
+
+    .carousel-next {
+      right: 5px;
+    }
+
+    @media (max-width: 600px) {
+      .carousel-wrapper {
+        padding: 0 35px;
+      }
+      .carousel-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+      }
+      .carousel-slide {
+        padding: 0 5px;
+      }
+    }
+
+    .servicebox {
+      background-color: var(--header-bg);
+      padding: 15px;
+      border-radius: 40px;
+      min-height: 300px;
+      height: 300px;
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .more {
+      background-color: var(--colored-button);
+      padding: 15px;
+      color: #ffffff;
+      border: none;
+      text-decoration: none;
+      border-radius: 30px;
+      margin-top: auto;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 10px;
+      opacity: 0.5;
+    }
+
+      .gender {
+        font-weight: 200;
+        opacity: 0.5;
+      }
+  </style>
+</head>
+<body>
+
+  <div class="controls">
+    <button id="burger" class="burger" onclick="toggleDropdown()">≡</button>
+    
+    <button id="theme-toggle" class="control-btn" data-en="Theme" data-es="Tema">Theme</button>
+    <button id="lang-toggle" class="control-btn">EN</button>
+  </div>
+  
+  <div class="dropdown" id="dropmeow">
+      <a href="#about" data-en="About myself" data-es="Sobre mí">About myself</a>
+      <a href="#services" data-en="My services" data-es="Mis servicios">My services</a>
+      <a href="portfolio.html" data-en="Portfolio" data-es="Portafolio">Portfolio</a>
+      <a href="commission.html" data-en="Commission me" data-es="Comisiones">Commission me</a>
+      <div class="separator"></div>
+      <a href="characters.html" data-en="My characters" data-es="Mis personajes">My characters</a>
+  </div>
+
+  <div class="header-wrapper">
+    <div class="header">
+      <h1 class="your" data-en="Your" data-es="Tu">Your</h1>
+      <div class="spinny">
+        <h1 id="prof" class="profs visible">Artist</h1>
+      </div>
+    </div>
+  </div>
+
+  <section class="aboutmes" id="about">
+    <h2 data-en="About Myself" data-es="Sobre mi">About Myself</h2>
+    <p data-en="Hi! I'm Katto, I am an artist, and tech enthusiast in general. I believe some of you reading this have met me by multiple names, including katt, void, fashui, or even cattleox if you've known me since the beginning." data-es="Hola! Soy Katto, soy un artista y entusiasta de la tecnologia en general. Creo que alguno de ustedes que leen esto me cononcieron por otros nombres, incluyendo katt, void, fashui, o incluso cattleox si me conociste desde el inicio." class="amp">Hi! I'm Katto, I am an artist, and tech enthusiast in general. I believe some of you reading this have met me by multiple names, including katt, void, fashui, or even cattleox if you've known me since the beginning.</p>
+    <p data-en="I plan on studying medicine and pathology in the future, and/or maybe computer science." data-es="Planeo estudiar medicina y patologia en el futuro, o/y incluso ingenieria en computación" class="amp">I plan on studying medicine and pathology in the future, and/or maybe computer science.</p>
+    <p data-en="I'm a furry, if that wasn't obvious from the header, I have NOT gone to any convention yet, but whenever I get a fursuit I probably will." data-es="Soy un furry, si no era obvio por el header. NO he ido a ninguna conveción aún, pero cuando obtenga u  fursuit probablemente lo hare" class="amp">I'm a furry, if that wasn't obvious from the header, I have NOT gone to any convention yet, but whenever I get a fursuit I probably will.</p>
+
+    <p class="gender" data-en="I'm Bisexual, and Non-binary. I go by any pronouns." data-es="Soy Bisexual, y no binario. Usa el pronombre que quieras conmigo.">I'm Bisexual, and Non-binary. I go by any pronoun.</p>
+  </section>
+
+  <img src="AboutMe.png" alt="Katto holding a sign that says About Me" class="aboutmeimg">
+
+  <section id="services">
+    <h2 data-en="My Services" data-es="Mis Servicios">My Services</h2>
+    
+    <div class="carousel-wrapper">
+      <button class="carousel-btn carousel-prev" aria-label="Previous service">&#10094;</button>
+      
+      <div class="carousel-track-container">
+        <div class="carousel-track">
+          
+          <div class="carousel-slide">
+            <div class="servicebox">
+              <h2 data-en="Commissions" data-es="Comisiones">Commissions</h2>
+              <p data-en="You can commission me (If theres slots of course) I do mainly furry art for cheap but I can draw feral and human art (NO NSFW)" data-es="Puedes comisionarme (Si hay espacios abiertos obvio) Principalmente dibujo furros barato, pero puedo dibujar personajes animales y humanos (NO HAY NSFW)">You can commission me (If theres slots of course) I do mainly furry art for cheap but I can draw feral and human art (NO NSFW)</p>
+              <a href="commission/" class="more">More Info</a>
+            </div>
+          </div>
+          
+          <div class="carousel-slide">
+            <div class="servicebox">
+              <h2 data-en="Web Development" data-es="Desarrollo Web">Web Development</h2>
+              <p data-en="I can make you a website like this one, or basically most other styles, price may vary, hosting not included." data-es="Puedo hacerte una pagina web como esta o en otros estilos, los precios varian, el hosting no va incluido.">I can make you a website like this one, or basically most other styles, price may vary, hosting not included.</p>
+              <p class="subtitle" data-en="For more info, send me an email at whatever@katto.online or DM on discord at @exp009." data-es="Más info no disponible, para consultar enviame un correo a whatever@katto.online o enviame DM a discord a @exp009.">For more info, send me an email at whatever@katto.online or DM on discord at @exp009.</p>
+            </div>
+          </div>
+          
+          <div class="carousel-slide">
+            <div class="servicebox">
+              <h2 data-en="Mod Development (MC)" data-es="Desarrollo de Mods (MC)">Mod Development</h2>
+              <p data-en="I can make you minecraft mods (specially on forge!) or add your character to my minecraft mod: Changed Extras" data-es="Puedo hacerte mods para minecraft (especialmente para forge) o puedo añadir a tu personaje a mi mod de minecraft: Changed Extras.">I can make you minecraft mods (specially on forge!) or add your character to my minecraft mod: Changed Extras</p>
+              <a href="portfolio/" class="more">More Info</a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+      <button class="carousel-btn carousel-next" aria-label="Next service">&#10095;</button>
+    </div>
+  </section>
+
+  <script>
+    let currentLang = 'en';
+    const wordsDict = {
+      en: ["Artist", "Web developer", "Mod developer", "Furry"],
+      es: ["Artista", "Desarrollador Web", "Desarrollador de Mods", "Furry"]
     };
 
-    const socialButtons = document.querySelectorAll('.list-btn');
-    const socialEmbed = document.getElementById('social-embed');
+    let currentIndex = 0;
+    const textElement = document.getElementById("prof");
 
-    socialButtons.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const platform = e.currentTarget.dataset.social;
-        const data = socialData[platform];
+    function cycleText() {
+        textElement.classList.remove("visible");
+        textElement.classList.add("exit");
       
-        document.getElementById('social-title').innerText = data.title;
-        document.getElementById('social-desc').innerText = data.desc;
-        document.getElementById('social-link').href = data.link;
-        document.getElementById('social-color').style.backgroundColor = data.color;
+        setTimeout(() => {
+            const currentList = wordsDict[currentLang];
+            currentIndex = (currentIndex + 1) % currentList.length;
+            textElement.textContent = currentList[currentIndex];
 
-        socialEmbed.style.display = 'flex';
+            textElement.classList.remove("exit");
+            textElement.classList.add("enter");
+
+            setTimeout(() => {
+                textElement.classList.remove("enter");
+                textElement.classList.add("visible");
+            }, 50);
+
+        }, 400); 
+    }
+
+    let wordInterval = setInterval(cycleText, 2000);
+
+    const langBtn = document.getElementById('lang-toggle');
+    langBtn.addEventListener('click', () => {
+      currentLang = currentLang === 'en' ? 'es' : 'en';
+      langBtn.textContent = currentLang.toUpperCase();
+
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = el.getAttribute(`data-${currentLang}`);
       });
+
+      clearInterval(wordInterval);
+      currentIndex = 0;
+      textElement.textContent = wordsDict[currentLang][currentIndex];
+      wordInterval = setInterval(cycleText, 2000);
     });
 
-const charListContainer = document.getElementById('character-list');
-const charEmbed = document.getElementById('char-embed');
+    const themeBtn = document.getElementById('theme-toggle');
+    themeBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+    });
 
-fetch('ocs/characters.json')
-  .then(response => response.json())
-  .then(characters => {
-    characters.forEach(char => {
-      const btn = document.createElement('button');
-      btn.className = 'list-btn';
+    function generateStars(starCount) {
+      const header = document.querySelector('.header');
+      if(!header) return;
+      const fragment = document.createDocumentFragment();
 
-      const miniImg = document.createElement('img');
-      miniImg.src = char.image || 'ocs/default-avatar.png'; 
-      miniImg.className = 'char-avatar-mini';
-      
-      const nameText = document.createElement('span');
-      nameText.innerText = char.name;
-      
-      btn.appendChild(miniImg);
-      btn.appendChild(nameText);
-      
-      btn.addEventListener('click', () => {
-        document.getElementById('char-title').innerText = char.name;
-        document.getElementById('char-desc').innerText = char.description;
-        document.getElementById('char-color').style.backgroundColor = char.color || '#999';
-        
-        const imgEl = document.getElementById('char-img');
-        imgEl.src = char.image;
-        imgEl.style.display = char.image ? 'block' : 'none';
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
 
-        charEmbed.style.display = 'flex';
+        const size = Math.random() * 1.5 + 1; 
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+
+        const moveX = (Math.random() * 16 - 8) + 'px';
+        const moveY = (Math.random() * 16 - 8) + 'px';
+        star.style.setProperty('--move-x', moveX);
+        star.style.setProperty('--move-y', moveY);
+
+        const duration = (Math.random() * 3 + 4) + 's'; 
+        star.style.setProperty('--duration', duration);
+        star.style.animationDelay = `${Math.random() * -4}s`;
+
+        fragment.appendChild(star);
+      }
+      
+      header.appendChild(fragment);
+    }
+
+    generateStars(45);
+
+    function toggleDropdown() {
+      document.getElementById("dropmeow").classList.toggle("show");
+    }
+
+    window.onclick = function(event) {
+      if (!event.target.matches('.burger')) {
+        var dropdowns = document.getElementsByClassName("dropdown");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+
+    /* Carousel logic */
+    const track = document.querySelector('.carousel-track');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+    let currentSlide = 0;
+
+    function updateCarousel() {
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    if (prevBtn && nextBtn && track && slides.length > 0) {
+      prevBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide > 0) ? currentSlide - 1 : slides.length - 1;
+        updateCarousel();
       });
       
-      charListContainer.appendChild(btn);
-    });
-  })
-  .catch(error => console.error("Error loading characters:", error));
-  })();
-</script>
-<script src="portfolio/portfolio-loader.js"></script>
+      nextBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
+        updateCarousel();
+      });
+    }
+  </script>
 </body>
 </html>
-
-
-

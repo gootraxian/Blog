@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio | Katto dot online</title>
+  <link rel="icon" href="favicon.ico">
+  <style>
+    :root {
+      --bg-color: #121212;
+      --header-bg: #000000;
+      --text-main: #ffffff;
+      --text-muted: #ffffff9a;
+      --prof-bg: #ffffff36;
+      --star-color: #ffffff;
+      --star-opacity-min: 0.4;
+      --star-filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.9));
+      --btn-bg: #ffffff20;
+      --btn-text: #ffffff;
+      --dropdown-shadow: rgba(0, 0, 0, 0.5);
+      --colored-button: #434ed4;
+      --card-bg: #1a1a1a;
+      --card-border: #ffffff15;
+      --tab-active-bg: #ffffff18;
+      --tab-active-border: #ffffff45;
+    }
+
+    [data-theme="light"] {
+      --bg-color: #f0f0f0;
+      --header-bg: #e0e0e0;
+      --text-main: #121212;
+      --text-muted: #1212129a;
+      --prof-bg: #0000001a;
+      --star-color: #4a5568;
+      --star-opacity-min: 0.3;
+      --star-filter: drop-shadow(0 0 2px rgba(74, 85, 104, 0.5));
+      --btn-bg: #00000015;
+      --btn-text: #121212;
+      --dropdown-shadow: rgba(0, 0, 0, 0.1);
+      --colored-button: #151b68;
+      --card-bg: #ffffff;
+      --card-border: #00000015;
+      --tab-active-bg: #00000012;
+      --tab-active-border: #00000045;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background-color: var(--bg-color);
+      transition: background-color 0.3s ease;
+      font-family: system-ui, -apple-system, sans-serif;
+      color: var(--text-main);
+      padding-top: 60px;
+    }
+
+    h1 { margin: 0; }
+    p { font-weight: 300; }
+
+    /* Controls */
+    .controls {
+      position: fixed;
+      top: 15px;
+      left: 0;
+      right: 15px;
+      display: flex;
+      gap: 10px;
+      z-index: 20;
+    }
+
+    .control-btn {
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background-color 0.2s, color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+      font-family: inherit;
+    }
+
+    .control-btn:hover { background-color: var(--prof-bg); }
+
+    .burger {
+      color: var(--btn-text);
+      padding: 8px 15px;
+      background-color: transparent;
+      border: none;
+      margin-right: auto;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      border-radius: 6px;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s;
+      font-family: inherit;
+    }
+
+    .burger:hover { background-color: var(--btn-bg); }
+
+    /* Dropdown */
+    .dropdown {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 60px;
+      left: 15px;
+      background-color: var(--header-bg);
+      min-width: 180px;
+      border-radius: 8px;
+      box-shadow: 0px 8px 24px var(--dropdown-shadow);
+      border: 1px solid var(--btn-bg);
+      overflow: hidden;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px) scale(0.98);
+      pointer-events: none;
+      transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease, border 0.3s ease;
+    }
+
+    .dropdown.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .dropdown a {
+      color: var(--text-main);
+      padding: 12px 16px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background-color 0.2s, color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .dropdown a:hover { background-color: var(--prof-bg); }
+
+    .dropdown .separator {
+      height: 1px;
+      background-color: var(--btn-bg);
+      margin: 4px 0;
+    }
+
+    /* Portfolio Section */
+    #portfolio {
+      padding: 20px 20px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    #portfolio h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-main);
+    }
+
+    .portfolio-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .portfolio-tab-btn {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      padding: 8px 18px;
+      border-radius: 20px;
+      border: 1px solid var(--card-border);
+      background: var(--btn-bg);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .portfolio-tab-btn:hover {
+      background: var(--prof-bg);
+      color: var(--text-main);
+      transform: translateY(-1px);
+    }
+
+    .portfolio-tab-btn.active {
+      background: var(--tab-active-bg);
+      border-color: var(--tab-active-border);
+      color: var(--text-main);
+      box-shadow: 0 2px 10px var(--dropdown-shadow);
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      grid-auto-flow: dense;
+    }
+
+    .grid-item {
+      background: var(--card-bg);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 180px;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.25s;
+      border: 1px solid var(--card-border);
+      opacity: 1;
+    }
+
+    .grid-item.hidden {
+      display: none;
+    }
+
+    .grid-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 24px var(--dropdown-shadow);
+    }
+
+    .grid-item img,
+    .grid-item video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .grid-item video { max-height: 360px; }
+
+    @media (min-width: 600px) {
+      .grid-item.orientation-landscape { grid-column: span 2; }
+      .grid-item.orientation-portrait { grid-row: span 2; }
+    }
+
+    @media (max-width: 600px) {
+      .grid-container { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.6rem; }
+      .grid-item { min-height: 140px; border-radius: 12px; }
+    }
+
+    /* Loading state */
+    .portfolio-loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    .portfolio-error {
+      text-align: center;
+      padding: 60px 20px;
+      color: #ff4747;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--btn-bg); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--prof-bg); }
+  </style>
+</head>
+<body>
+
+  <div class="controls">
+    <button id="burger" class="burger" onclick="toggleDropdown()">≡</button>
+    <button id="theme-toggle" class="control-btn" data-en="Theme" data-es="Tema">Theme</button>
+    <button id="lang-toggle" class="control-btn">EN</button>
+  </div>
+
+  <div class="dropdown" id="dropmeow">
+    <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+    <a href="index.html#about" data-en="About myself" data-es="Sobre mí">About myself</a>
+    <a href="index.html#services" data-en="My services" data-es="Mis servicios">My services</a>
+    <a href="portfolio.html" data-en="Portfolio" data-es="Portafolio">Portfolio</a>
+    <a href="commission.html" data-en="Commission me" data-es="Comisiones">Commission me</a>
+    <div class="separator"></div>
+    <a href="characters.html" data-en="My characters" data-es="Mis personajes">My characters</a>
+  </div>
+
+  <section id="portfolio">
+    <h2 data-en="Portfolio" data-es="Portafolio">Portfolio</h2>
+    <div id="tab-bar"></div>
+    <div class="grid-container" id="grid">
+      <p class="portfolio-loading" data-en="Loading portfolio..." data-es="Cargando portafolio...">Loading portfolio...</p>
+    </div>
+  </section>
+
+  <script>
+    /* ── Language & Theme ── */
+    let currentLang = 'en';
+
+    const langBtn = document.getElementById('lang-toggle');
+    langBtn.addEventListener('click', () => {
+      currentLang = currentLang === 'en' ? 'es' : 'en';
+      langBtn.textContent = currentLang.toUpperCase();
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = el.getAttribute(`data-${currentLang}`);
+      });
+    });
+
+    const themeBtn = document.getElementById('theme-toggle');
+    themeBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+    });
+
+    /* ── Dropdown ── */
+    function toggleDropdown() {
+      document.getElementById("dropmeow").classList.toggle("show");
+    }
+    window.onclick = function(event) {
+      if (!event.target.matches('.burger')) {
+        var dropdowns = document.getElementsByClassName("dropdown");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    };
+
+    /* ── Portfolio Loader ── */
+    const grid = document.getElementById('grid');
+    const tabBar = document.getElementById('tab-bar');
+
+    function createMediaItem(entry) {
+      return new Promise((resolve) => {
+        const file = (typeof entry === 'string') ? entry : entry.file;
+        const category = (typeof entry === 'string') ? 'Uncategorized' : (entry.category || 'Uncategorized');
+        const lower = file.toLowerCase();
+        const item = document.createElement('div');
+        item.className = 'grid-item';
+        item.dataset.category = category;
+        const path = `portfolio/${file}`;
+
+        if (lower.endsWith('.png') || lower.endsWith('.jpg') || lower.endsWith('.jpeg')) {
+          const img = new Image();
+          img.src = path;
+          img.loading = 'lazy';
+          img.alt = file;
+          resolve({ element: item });
+          img.onload = () => {
+            const ratio = img.naturalWidth / img.naturalHeight;
+            if (ratio > 1.2) item.classList.add('orientation-landscape');
+            else if (ratio < 0.8) item.classList.add('orientation-portrait');
+            else item.classList.add('orientation-square');
+          };
+          img.onerror = () => item.remove();
+          item.appendChild(img);
+        }
+        else if (lower.endsWith('.mp4')) {
+          const video = document.createElement('video');
+          video.src = path;
+          video.muted = true;
+          video.autoplay = true;
+          video.loop = true;
+          video.playsInline = true;
+          video.preload = 'metadata';
+          video.onloadedmetadata = () => {
+            const ratio = video.videoWidth / video.videoHeight || 1.77;
+            if (ratio > 1.2) item.classList.add('orientation-landscape');
+            else if (ratio < 0.8) item.classList.add('orientation-portrait');
+            else item.classList.add('orientation-square');
+            resolve({ element: item });
+            video.play().catch(() => {});
+          };
+          video.onerror = () => resolve(null);
+          item.appendChild(video);
+        }
+        else {
+          resolve(null);
+        }
+      });
+    }
+
+    function applyFilter(activeCategory) {
+      const items = grid.querySelectorAll('.grid-item');
+      items.forEach(item => {
+        const match = activeCategory === 'All' || item.dataset.category === activeCategory;
+        item.classList.toggle('hidden', !match);
+      });
+    }
+
+    async function loadManifest() {
+      try {
+        const res = await fetch('portfolio/manifest.json', { cache: 'no-cache' });
+        const entries = await res.json();
+        const categories = ['All', ...new Set(entries.map(e => e.category).filter(Boolean))];
+
+        tabBar.className = 'portfolio-tabs';
+        tabBar.setAttribute('role', 'tablist');
+        let activeCategory = 'All';
+
+        categories.forEach(cat => {
+          const btn = document.createElement('button');
+          btn.className = 'portfolio-tab-btn' + (cat === 'All' ? ' active' : '');
+          btn.textContent = cat;
+          btn.setAttribute('role', 'tab');
+          btn.setAttribute('aria-selected', cat === 'All' ? 'true' : 'false');
+          btn.addEventListener('click', () => {
+            activeCategory = cat;
+            tabBar.querySelectorAll('.portfolio-tab-btn').forEach(b => {
+              const isActive = b.textContent === cat;
+              b.classList.toggle('active', isActive);
+              b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+            applyFilter(activeCategory);
+          });
+          tabBar.appendChild(btn);
+        });
+
+        grid.innerHTML = '';
+        const chunkSize = 5;
+        for (let i = 0; i < entries.length; i += chunkSize) {
+          const chunk = entries.slice(i, i + chunkSize);
+          const results = await Promise.all(chunk.map(e => createMediaItem(e)));
+          results.forEach(result => {
+            if (!result) return;
+            grid.appendChild(result.element);
+          });
+        }
+        applyFilter('All');
+      } catch (err) {
+        console.error(err);
+        grid.innerHTML = '<p class="portfolio-error" data-en="Could not load portfolio." data-es="No se pudo cargar el portafolio.">Could not load portfolio.</p>';
+      }
+    }
+
+    loadManifest();
+  </script>
+</body>
+</html>

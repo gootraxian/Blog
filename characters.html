@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Characters | Katto dot online</title>
+  <link rel="icon" href="favicon.ico">
+  <style>
+    :root {
+      --bg-color: #121212;
+      --header-bg: #000000;
+      --text-main: #ffffff;
+      --text-muted: #ffffff9a;
+      --prof-bg: #ffffff36;
+      --btn-bg: #ffffff20;
+      --btn-text: #ffffff;
+      --dropdown-shadow: rgba(0, 0, 0, 0.5);
+      --colored-button: #434ed4;
+      --card-bg: #1a1a1a;
+      --card-border: #ffffff15;
+      --section-bg: #ffffff08;
+    }
+
+    [data-theme="light"] {
+      --bg-color: #f0f0f0;
+      --header-bg: #e0e0e0;
+      --text-main: #121212;
+      --text-muted: #1212129a;
+      --prof-bg: #0000001a;
+      --btn-bg: #00000015;
+      --btn-text: #121212;
+      --dropdown-shadow: rgba(0, 0, 0, 0.1);
+      --colored-button: #151b68;
+      --card-bg: #ffffff;
+      --card-border: #00000015;
+      --section-bg: #00000008;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background-color: var(--bg-color);
+      transition: background-color 0.3s ease;
+      font-family: system-ui, -apple-system, sans-serif;
+      color: var(--text-main);
+      padding-top: 60px;
+    }
+
+    h1, h2, h3, h4 { margin: 0; }
+    p { font-weight: 300; line-height: 1.6; }
+
+    /* Controls */
+    .controls {
+      position: fixed;
+      top: 15px;
+      left: 0;
+      right: 15px;
+      display: flex;
+      gap: 10px;
+      z-index: 20;
+    }
+
+    .control-btn {
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background-color 0.2s, color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+      font-family: inherit;
+    }
+
+    .control-btn:hover { background-color: var(--prof-bg); }
+
+    .burger {
+      color: var(--btn-text);
+      padding: 8px 15px;
+      background-color: transparent;
+      border: none;
+      margin-right: auto;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      border-radius: 6px;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s;
+      font-family: inherit;
+    }
+
+    .burger:hover { background-color: var(--btn-bg); }
+
+    /* Dropdown */
+    .dropdown {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 60px;
+      left: 15px;
+      background-color: var(--header-bg);
+      min-width: 180px;
+      border-radius: 8px;
+      box-shadow: 0px 8px 24px var(--dropdown-shadow);
+      border: 1px solid var(--btn-bg);
+      overflow: hidden;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px) scale(0.98);
+      pointer-events: none;
+      transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease, border 0.3s ease;
+    }
+
+    .dropdown.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .dropdown a {
+      color: var(--text-main);
+      padding: 12px 16px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background-color 0.2s, color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .dropdown a:hover { background-color: var(--prof-bg); }
+
+    .dropdown .separator {
+      height: 1px;
+      background-color: var(--btn-bg);
+      margin: 4px 0;
+    }
+
+    /* Content */
+    .tab-container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px 20px 60px;
+      animation: slideUp 0.6s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tab-container h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .intro-text {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    /* Character Grid */
+    .char-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .char-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .char-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px var(--dropdown-shadow);
+      border-color: var(--prof-bg);
+    }
+
+    .char-accent {
+      height: 5px;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .char-img-wrap {
+      width: 100%;
+      aspect-ratio: 1;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--section-bg);
+    }
+
+    .char-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .char-card:hover .char-img-wrap img {
+      transform: scale(1.05);
+    }
+
+    .char-info {
+      padding: 18px 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .char-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .char-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .char-link {
+      margin-top: auto;
+      padding-top: 10px;
+      font-size: 0.8rem;
+      color: var(--colored-button);
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.2s;
+      align-self: flex-start;
+    }
+
+    .char-link:hover { opacity: 0.7; }
+
+    .char-link.hidden { display: none; }
+
+    /* Loading & Error */
+    .loading-state {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--text-muted);
+      font-weight: 300;
+      font-size: 1.1rem;
+    }
+
+    .error-state {
+      text-align: center;
+      padding: 80px 20px;
+      color: #ff4747;
+    }
+
+    @media (max-width: 600px) {
+      .char-grid { grid-template-columns: 1fr; }
+      .tab-container { padding: 16px 16px 50px; }
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--btn-bg); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--prof-bg); }
+  </style>
+</head>
+<body>
+
+  <div class="controls">
+    <button id="burger" class="burger" onclick="toggleDropdown()">≡</button>
+    <button id="theme-toggle" class="control-btn" data-en="Theme" data-es="Tema">Theme</button>
+    <button id="lang-toggle" class="control-btn">EN</button>
+  </div>
+
+  <div class="dropdown" id="dropmeow">
+    <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+    <a href="index.html#about" data-en="About myself" data-es="Sobre mí">About myself</a>
+    <a href="index.html#services" data-en="My services" data-es="Mis servicios">My services</a>
+    <a href="portfolio.html" data-en="Portfolio" data-es="Portafolio">Portfolio</a>
+    <a href="commission.html" data-en="Commission me" data-es="Comisiones">Commission me</a>
+    <div class="separator"></div>
+    <a href="characters.html" data-en="My characters" data-es="Mis personajes">My characters</a>
+  </div>
+
+  <div class="tab-container">
+    <h2 data-en="My Characters" data-es="Mis Personajes">My Characters</h2>
+    <p class="intro-text" data-en="A collection of my original characters (OCs). Click any card to learn more about them." data-es="Una colección de mis personajes originales (OCs). Haz clic en cualquier tarjeta para saber más sobre ellos.">A collection of my original characters (OCs). Click any card to learn more about them.</p>
+
+    <div class="char-grid" id="char-grid">
+      <p class="loading-state" data-en="Loading characters..." data-es="Cargando personajes...">Loading characters...</p>
+    </div>
+  </div>
+
+  <script>
+    /* ── Language & Theme ── */
+    let currentLang = 'en';
+
+    const langBtn = document.getElementById('lang-toggle');
+    langBtn.addEventListener('click', () => {
+      currentLang = currentLang === 'en' ? 'es' : 'en';
+      langBtn.textContent = currentLang.toUpperCase();
+      document.querySelectorAll('[data-en]').forEach(el => {
+        const newText = el.getAttribute(`data-${currentLang}`);
+        if (newText) el.textContent = newText;
+      });
+    });
+
+    const themeBtn = document.getElementById('theme-toggle');
+    themeBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+    });
+
+    /* ── Dropdown ── */
+    function toggleDropdown() {
+      document.getElementById("dropmeow").classList.toggle("show");
+    }
+    window.onclick = function(event) {
+      if (!event.target.matches('.burger')) {
+        var dropdowns = document.getElementsByClassName("dropdown");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    };
+
+    /* ── Character Loader ── */
+    const grid = document.getElementById('char-grid');
+
+    function extractDocLink(desc) {
+      const match = desc.match(/https:\/\/docs\.google\.com\/[^\s]+/);
+      return match ? match[0] : null;
+    }
+
+    function cleanDescription(desc) {
+      return desc.replace(/https:\/\/[^\s]+/g, '').replace(/::\s*/g, ' • ').trim();
+    }
+
+    async function loadCharacters() {
+      try {
+        const res = await fetch('ocs/characters.json', { cache: 'no-cache' });
+        const characters = await res.json();
+
+        grid.innerHTML = '';
+
+        characters.forEach(char => {
+          const card = document.createElement('div');
+          card.className = 'char-card';
+
+          const docLink = extractDocLink(char.description);
+          const cleanDesc = cleanDescription(char.description);
+          const color = char.color || '#999';
+
+          card.innerHTML = `
+            <div class="char-accent" style="background-color: ${color};"></div>
+            <div class="char-img-wrap">
+              <img src="${char.image}" alt="${char.name}" loading="lazy" onerror="this.style.display='none'">
+            </div>
+            <div class="char-info">
+              <div class="char-name">${char.name}</div>
+              <div class="char-desc">${cleanDesc}</div>
+              ${docLink ? `<a href="${docLink}" target="_blank" class="char-link">More info →</a>` : ''}
+            </div>
+          `;
+
+          grid.appendChild(card);
+        });
+      } catch (err) {
+        console.error(err);
+        grid.innerHTML = '<p class="error-state" data-en="Could not load characters." data-es="No se pudieron cargar los personajes.">Could not load characters.</p>';
+      }
+    }
+
+    loadCharacters();
+  </script>
+</body>
+</html>

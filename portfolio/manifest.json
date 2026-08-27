@@ -22,5 +22,13 @@
   { "file": "Warrior1.png",                                     "category": "Minecraft Building" },
   { "file": "Warrior2.png",                                     "category": "Minecraft Building" },
   { "file": "Warrior3.png",                                     "category": "Minecraft Building" },
-  { "file": "Untitled320_20260705192828.png","category": "Drawings & Art"  }
+  { "file": "Untitled320_20260705192828.png",                   "category": "Drawings & Art"  },
+  { "file": "Drone_Final.png",                                  "category": "Drawings & Art"  },
+  { "file": "Origin.png",                                       "category": "Drawings & Art"  },
+  { "file": "Gallery.png",                                      "category": "Drawings & Art"  },
+  { "file": "Maid.png",                                         "category": "Drawings & Art"  },
+  { "file": "Lichen.png",                                       "category": "Drawings & Art"  },
+  { "file": "LuminaraCat2.png",                                 "category": "Drawings & Art"  },
+  { "file": "PFP2.png",                                         "category": "Drawings & Art"  },
+  { "file": "Warriors Videogame.png",                           "category": "Drawings & Art"  }
 ]
