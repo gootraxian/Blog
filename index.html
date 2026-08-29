@@ -46,6 +46,8 @@
       scroll-behavior: smooth;
       overflow-x: hidden;
       width: 100%;
+      /* solid base for rem units */
+      font-size: 16px;
     }
 
     body {
@@ -57,16 +59,22 @@
       transition: background-color 0.3s ease;
       font-family: system-ui, -apple-system, sans-serif;
       color: var(--text-main);
-      /* MOBILE FIX: ensure readable base font size */
-      font-size: 16px;
+      /* prevent iOS auto-zoom on inputs */
+      -webkit-text-size-adjust: 100%;
     }
 
     h1 { margin: 0; }
 
-    p { font-weight: 300; }
+    /* consistent paragraph sizing */
+    p {
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
 
     .amp {
-      font-size: 15px;
+      font-size: 1rem;
+      line-height: 1.6;
     }
 
     .controls {
@@ -87,11 +95,10 @@
       padding: 8px 12px;
       border-radius: 6px;
       cursor: pointer;
-      font-size: 15px;
+      font-size: 0.875rem;
       font-weight: 500;
       transition: background-color 0.2s, color 0.2s;
       -webkit-tap-highlight-color: transparent;
-      /* MOBILE FIX: larger tap target */
       min-height: 44px;
       min-width: 44px;
       display: flex;
@@ -103,7 +110,6 @@
       background-color: var(--prof-bg);
     }
 
-    /* Dropdown with smooth transition */
     .dropdown {
       display: flex;
       flex-direction: column;
@@ -135,11 +141,10 @@
       color: var(--text-main);
       padding: 12px 16px;
       text-decoration: none;
-      font-size: 14px;
+      font-size: 0.9375rem;
       font-weight: 500;
       transition: background-color 0.2s, color 0.2s;
       -webkit-tap-highlight-color: transparent;
-      /* MOBILE FIX: larger tap target */
       min-height: 44px;
       display: flex;
       align-items: center;
@@ -160,8 +165,7 @@
       color: var(--text-muted);
       z-index: 1;
       transition: color 0.3s ease;
-      /* MOBILE FIX: responsive header text */
-      font-size: 1.2rem;
+      font-size: 1.25rem;
     }
 
     .profs {
@@ -169,9 +173,8 @@
       display: inline-block;
       transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s, color 0.3s;
       background-color: var(--prof-bg);
-      padding: 10px;
+      padding: 10px 14px;
       z-index: 1;
-      /* MOBILE FIX: responsive header text */
       font-size: 1.5rem;
     }
 
@@ -186,12 +189,8 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      gap: 5px;
-      padding-top: 80px;
-      padding-bottom: 40px;
-      /* MOBILE FIX: add side padding so text doesn't touch edges */
-      padding-left: 20px;
-      padding-right: 20px;
+      gap: 6px;
+      padding: 80px 20px 40px;
       position: relative;
       overflow: hidden;
       transition: background-color 0.3s ease;
@@ -251,55 +250,38 @@
       }
     }
 
-    /* MOBILE FIX: base font sizes for mobile first */
-    p, .amp {
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
     h2 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
     }
 
+    /* scale up on larger screens */
     @media (min-width: 768px) {
-      p, .amp {
-        font-size: 18px;
-      }
-      h2 {
-        font-size: 1.75rem;
-      }
-      .your {
-        font-size: 1.5rem;
-      }
-      .profs {
-        font-size: 2rem;
-      }
+      html { font-size: 17px; }
+      h2 { font-size: 1.5rem; }
+      .your { font-size: 1.5rem; }
+      .profs { font-size: 2rem; }
     }
 
     @media (min-width: 1200px) {
-      p, .amp {
-        font-size: 20px;
-      }
-      h2 {
-        font-size: 2rem;
-      }
+      html { font-size: 18px; }
+      h2 { font-size: 1.75rem; }
     }
 
     .burger {
       color: var(--btn-text);
-      padding: 8px 15px;
+      padding: 8px 12px;
       background-color: transparent;
       border: none;
       margin-right: auto;
       cursor: pointer;
-      font-size: 20px;
+      font-size: 1.25rem;
       display: flex;
       align-items: center;
       border-radius: 6px;
       -webkit-tap-highlight-color: transparent;
       transition: background-color 0.2s;
-      /* MOBILE FIX: larger tap target */
       min-height: 44px;
       min-width: 44px;
       justify-content: center;
@@ -324,24 +306,23 @@
 
     .aboutmeimg {
       max-width: 100%;
-      /* MOBILE FIX: maintain aspect ratio */
       height: auto;
       display: block;
+      margin: 0 auto;
     }
 
     .aboutmes {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      /* MOBILE FIX: constrain text width for readability */
-      max-width: 100%;
+      gap: 0.75rem;
     }
 
-    /* Carousel styles */
+    /* carousel */
     .carousel-wrapper {
       position: relative;
       width: 100%;
-      padding: 0 50px;
+      padding: 0 44px;
       margin-top: 20px;
     }
 
@@ -358,10 +339,10 @@
 
     .carousel-slide {
       min-width: 100%;
-      padding: 0 10px;
+      padding: 0 8px;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: stretch;
     }
 
     .carousel-btn {
@@ -371,11 +352,11 @@
       background-color: var(--btn-bg);
       color: var(--btn-text);
       border: none;
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 16px;
       line-height: 1;
       display: flex;
       align-items: center;
@@ -384,7 +365,6 @@
       transition: background-color 0.2s, color 0.2s, transform 0.2s;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
-      /* MOBILE FIX: larger tap target */
       min-height: 44px;
       min-width: 44px;
     }
@@ -399,85 +379,73 @@
     }
 
     .carousel-prev {
-      left: 5px;
+      left: 2px;
     }
 
     .carousel-next {
-      right: 5px;
-    }
-
-    @media (max-width: 600px) {
-      .carousel-wrapper {
-        padding: 0 40px;
-      }
-      .carousel-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 14px;
-      }
-      .carousel-slide {
-        padding: 0 5px;
-      }
+      right: 2px;
     }
 
     .servicebox {
       background-color: var(--header-bg);
-      padding: 20px;
+      padding: 24px 20px;
       border-radius: 24px;
-      /* MOBILE FIX: remove fixed height, let content decide */
-      min-height: 250px;
+      min-height: 240px;
       height: auto;
       width: 100%;
-      max-width: 320px;
+      max-width: 340px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       text-align: center;
+    }
+
+    .servicebox h2 {
+      font-size: 1.15rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .servicebox p {
+      font-size: 0.9375rem;
+      line-height: 1.5;
     }
 
     .more {
       background-color: var(--colored-button);
-      padding: 12px 24px;
+      padding: 10px 24px;
       color: #ffffff;
       border: none;
       text-decoration: none;
       border-radius: 30px;
       margin-top: auto;
-      /* MOBILE FIX: larger tap target */
       min-height: 44px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 0.9375rem;
       font-weight: 500;
     }
 
     .subtitle {
-      font-size: 10px;
+      font-size: 0.75rem;
       opacity: 0.5;
+      line-height: 1.4;
     }
 
     .gender {
       font-weight: 200;
       opacity: 0.5;
-      margin-top: 10px;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
     }
 
-    /* MOBILE FIX: better section spacing on small screens */
+    /* small screen tweaks */
     @media (max-width: 480px) {
-      .header {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
-      #about, #services {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
-      .servicebox {
-        padding: 16px;
-        border-radius: 20px;
-      }
+      .header { padding: 80px 16px 32px; }
+      #about, #services { padding: 16px; }
+      .carousel-wrapper { padding: 0 40px; }
+      .servicebox { padding: 20px 16px; border-radius: 20px; }
     }
   </style>
 </head>
@@ -485,7 +453,6 @@
 
   <div class="controls">
     <button id="burger" class="burger" onclick="toggleDropdown()">≡</button>
-
     <button id="theme-toggle" class="control-btn" data-en="Theme" data-es="Tema">Theme</button>
     <button id="lang-toggle" class="control-btn">EN</button>
   </div>
@@ -513,7 +480,6 @@
     <p data-en="Hi! I'm Katto, I am an artist, and tech enthusiast in general. I believe some of you reading this have met me by multiple names, including katt, void, fashui, or even cattleox if you've known me since the beginning." data-es="Hola! Soy Katto, soy un artista y entusiasta de la tecnologia en general. Creo que alguno de ustedes que leen esto me cononcieron por otros nombres, incluyendo katt, void, fashui, o incluso cattleox si me conociste desde el inicio." class="amp">Hi! I'm Katto, I am an artist, and tech enthusiast in general. I believe some of you reading this have met me by multiple names, including katt, void, fashui, or even cattleox if you've known me since the beginning.</p>
     <p data-en="I plan on studying medicine and pathology in the future, and/or maybe computer science." data-es="Planeo estudiar medicina y patologia en el futuro, o/y incluso ingenieria en computación" class="amp">I plan on studying medicine and pathology in the future, and/or maybe computer science.</p>
     <p data-en="I'm a furry, if that wasn't obvious from the header, I have NOT gone to any convention yet, but whenever I get a fursuit I probably will." data-es="Soy un furry, si no era obvio por el header. NO he ido a ninguna conveción aún, pero cuando obtenga u  fursuit probablemente lo hare" class="amp">I'm a furry, if that wasn't obvious from the header, I have NOT gone to any convention yet, but whenever I get a fursuit I probably will.</p>
-
     <p class="gender" data-en="I'm Bisexual, and Non-binary. I go by any pronouns." data-es="Soy Bisexual, y no binario. Usa el pronombre que quieras conmigo.">I'm Bisexual, and Non-binary. I go by any pronoun.</p>
   </section>
 
@@ -662,7 +628,6 @@
       }
     }
 
-    /* Carousel logic */
     const track = document.querySelector('.carousel-track');
     const slides = document.querySelectorAll('.carousel-slide');
     const prevBtn = document.querySelector('.carousel-prev');
